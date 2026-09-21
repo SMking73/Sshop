@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headset - S Shop</title>
+    <link rel="stylesheet" href="../design.css">
+</head>
+
+<body>
+
+    <header class="head">
+
+        <a href="../index.html" style="text-decoration:none;">
+            <h1>S Shop</h1>
+        </a>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../product.html">Products</a>
+            <a href="../favorite.html">♥ Favorites</a>
+            <a href="../about.html">About Us</a>
+        </nav>
+
+        <form class="search-form" id="searchForm">
+            <input type="search" id="searchInput" placeholder="Search items">
+            <button>🔍</button>
+        </form>
+
+        <a href="../cart.html" class="cart-link">
+            🛒 Cart <span id="cartCount">0</span>
+        </a>
+
+    </header>
+
+    <main>
+
+        <div class="products">
+
+            <div class="product-card" data-name="Gaming Headset" data-price="89 $" data-category="Headset"
+                data-description="Gaming headset with clear sound and comfortable design for long gaming sessions.">
+
+                <button class="favorite-button">♡</button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf0h10Fj-Ee7h0-fQiUJUX3x2ppff97PUcnDJ9pYOksw&s=10"
+                    alt="Gaming Headset">
+
+                <h2>Gaming Headset</h2>
+
+                <p class="price">89 $</p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <div class="popup" id="productPopup">
+
+        <div class="popup-content">
+
+            <button class="close-popup" id="closePopup">✕</button>
+
+            <img id="popupImage" src="" alt="Product">
+
+            <div class="popup-info">
+
+                <h2 id="popupName"></h2>
+                <p class="popup-price" id="popupPrice"></p>
+                <p id="popupCategory"></p>
+                <p id="popupDescription"></p>
+
+                <div class="rating-section">
+
+                    <h3>Rate this product</h3>
+
+                    <div class="stars" id="ratingStars">
+                        <button data-rating="1">★</button>
+                        <button data-rating="2">★</button>
+                        <button data-rating="3">★</button>
+                        <button data-rating="4">★</button>
+                        <button data-rating="5">★</button>
+                    </div>
+
+                    <p id="ratingText">No rating yet</p>
+
+                </div>
+
+                <button class="favorite-popup-button" id="favoritePopupButton">
+                    ♡ Add to Favorites
+                </button>
+
+                <button class="buy-button" id="addToCartButton">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const product = document.querySelector(".product-card");
+        const popup = document.getElementById("productPopup");
+
+        let favorites = JSON.parse(localStorage.getItem("sShopFavorites")) || [];
+        let cart = JSON.parse(localStorage.getItem("sShopCart")) || [];
+        let ratings = JSON.parse(localStorage.getItem("sShopRatings")) || {};
+
+        function isFav() {
+            return favorites.some(x => typeof x === "string" ? x === product.dataset.name : x.name === product.dataset.name);
+        }
+
+        function updateFav() {
+            const button = product.querySelector(".favorite-button");
+            button.textContent = isFav() ? "♥" : "♡";
+            button.classList.toggle("favorite-active", isFav());
+        }
+
+        function toggleFav() {
+
+            if (isFav()) {
+                favorites = favorites.filter(x => typeof x === "string" ? x !== product.dataset.name : x.name !== product.dataset.name);
+            } else {
+                favorites.push({
+                    name: product.dataset.name,
+                    price: product.dataset.price,
+                    category: product.dataset.category,
+                    description: product.dataset.description,
+                    image: product.querySelector("img").src
+                });
+            }
+
+            localStorage.setItem("sShopFavorites", JSON.stringify(favorites));
+            updateFav();
+        }
+
+        product.onclick = () => {
+
+            popupName.textContent = product.dataset.name;
+            popupPrice.textContent = product.dataset.price;
+            popupCategory.textContent = "Category: " + product.dataset.category;
+            popupDescription.textContent = product.dataset.description;
+            popupImage.src = product.querySelector("img").src;
+
+            updateRating();
+
+            popup.classList.add("active");
+        };
+
+        product.querySelector(".favorite-button").onclick = e => {
+            e.stopPropagation();
+            toggleFav();
+        };
+
+        favoritePopupButton.onclick = toggleFav;
+
+        function updateRating() {
+
+            const rating = ratings[product.dataset.name] || 0;
+
+            document.querySelectorAll("#ratingStars button").forEach(s => {
+                s.classList.toggle("active", Number(s.dataset.rating) <= rating);
+            });
+
+            ratingText.textContent = rating ? rating + " / 5 ⭐" : "No rating yet";
+        }
+
+        document.querySelectorAll("#ratingStars button").forEach(s => {
+            s.onclick = e => {
+
+                e.stopPropagation();
+
+                ratings[product.dataset.name] = Number(s.dataset.rating);
+
+                localStorage.setItem("sShopRatings", JSON.stringify(ratings));
+
+                updateRating();
+            };
+        });
+
+        addToCartButton.onclick = () => {
+
+            const old = cart.find(x => x.name === product.dataset.name);
+
+            if (old) old.quantity++;
+            else cart.push({
+                name: product.dataset.name,
+                price: product.dataset.price,
+                category: product.dataset.category,
+                description: product.dataset.description,
+                image: product.querySelector("img").src,
+                quantity: 1
+            });
+
+            localStorage.setItem("sShopCart", JSON.stringify(cart));
+
+            cartCount.textContent = cart.reduce((a, x) => a + x.quantity, 0);
+        };
+
+        closePopup.onclick = () => popup.classList.remove("active");
+
+        popup.onclick = e => {
+            if (e.target === popup) popup.classList.remove("active");
+        };
+
+        cartCount.textContent = cart.reduce((a, x) => a + x.quantity, 0);
+
+        updateFav();
+
+        searchForm.onsubmit = e => {
+            e.preventDefault();
+
+            const q = searchInput.value.trim();
+
+            location.href = q
+                ? "../product.html?search=" + encodeURIComponent(q)
+                : "../product.html";
+        };
+    </script>
+
+</body>
+
+</html>

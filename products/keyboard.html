@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard - S Shop</title>
+    <link rel="stylesheet" href="../design.css">
+</head>
+
+<body>
+
+<header class="head">
+
+<a href="../index.html" style="text-decoration:none;">
+<h1>S Shop</h1>
+</a>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../product.html">Products</a>
+<a href="../favorite.html">♥ Favorites</a>
+<a href="../about.html">About Us</a>
+</nav>
+
+<form class="search-form" id="searchForm">
+<input type="search" id="searchInput" placeholder="Search items">
+<button>🔍</button>
+</form>
+
+<a href="../cart.html" class="cart-link">
+🛒 Cart <span id="cartCount">0</span>
+</a>
+
+</header>
+
+<main>
+
+<div class="products">
+
+<div class="product-card"
+data-name="Gaming Keyboard"
+data-price="75 $"
+data-category="Keyboard"
+data-description="Mechanical gaming keyboard with RGB lighting and responsive keys.">
+
+<button class="favorite-button">♡</button>
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4vYvYeeg9eZFARzpGKLaRYh2F3A8oL3Jftf4LMxT_mw&s=10"
+alt="Gaming Keyboard">
+
+<h2>Gaming Keyboard</h2>
+
+<p class="price">75 $</p>
+
+</div>
+
+</div>
+
+</main>
+
+<div class="popup" id="productPopup">
+
+<div class="popup-content">
+
+<button class="close-popup" id="closePopup">✕</button>
+
+<img id="popupImage" src="" alt="Product">
+
+<div class="popup-info">
+
+<h2 id="popupName"></h2>
+<p class="popup-price" id="popupPrice"></p>
+<p id="popupCategory"></p>
+<p id="popupDescription"></p>
+
+<div class="rating-section">
+
+<h3>Rate this product</h3>
+
+<div class="stars" id="ratingStars">
+<button data-rating="1">★</button>
+<button data-rating="2">★</button>
+<button data-rating="3">★</button>
+<button data-rating="4">★</button>
+<button data-rating="5">★</button>
+</div>
+
+<p id="ratingText">No rating yet</p>
+
+</div>
+
+<button class="favorite-popup-button" id="favoritePopupButton">
+♡ Add to Favorites
+</button>
+
+<button class="buy-button" id="addToCartButton">
+🛒 Add to Cart
+</button>
+
+</div>
+</div>
+</div>
+
+<script>
+const p=document.querySelector(".product-card");
+const popup=document.getElementById("productPopup");
+const cartCount=document.getElementById("cartCount");
+
+let favorites=JSON.parse(localStorage.getItem("sShopFavorites"))||[];
+let cart=JSON.parse(localStorage.getItem("sShopCart"))||[];
+let ratings=JSON.parse(localStorage.getItem("sShopRatings"))||{};
+
+function favorite(){
+return favorites.some(x=>typeof x==="string"?x===p.dataset.name:x.name===p.dataset.name);
+}
+
+function updateFavorite(){
+const b=p.querySelector(".favorite-button");
+b.textContent=favorite()?"♥":"♡";
+b.classList.toggle("favorite-active",favorite());
+}
+
+function toggleFavorite(){
+
+if(favorite()){
+favorites=favorites.filter(x=>typeof x==="string"?x!==p.dataset.name:x.name!==p.dataset.name);
+}else{
+favorites.push({
+name:p.dataset.name,
+price:p.dataset.price,
+category:p.dataset.category,
+description:p.dataset.description,
+image:p.querySelector("img").src
+});
+}
+
+localStorage.setItem("sShopFavorites",JSON.stringify(favorites));
+updateFavorite();
+}
+
+let currentRating=0;
+
+function updateRating(){
+
+currentRating=ratings[p.dataset.name]||0;
+
+document.querySelectorAll("#ratingStars button").forEach(s=>{
+s.classList.toggle("active",Number(s.dataset.rating)<=currentRating);
+});
+
+document.getElementById("ratingText").textContent=
+currentRating?currentRating+" / 5 ⭐":"No rating yet";
+}
+
+p.onclick=()=>{
+popupName.textContent=p.dataset.name;
+popupPrice.textContent=p.dataset.price;
+popupCategory.textContent="Category: "+p.dataset.category;
+popupDescription.textContent=p.dataset.description;
+popupImage.src=p.querySelector("img").src;
+updateRating();
+popup.classList.add("active");
+};
+
+p.querySelector(".favorite-button").onclick=e=>{
+e.stopPropagation();
+toggleFavorite();
+};
+
+favoritePopupButton.onclick=toggleFavorite;
+
+document.querySelectorAll("#ratingStars button").forEach(s=>{
+s.onclick=e=>{
+e.stopPropagation();
+ratings[p.dataset.name]=Number(s.dataset.rating);
+localStorage.setItem("sShopRatings",JSON.stringify(ratings));
+updateRating();
+};
+});
+
+addToCartButton.onclick=()=>{
+
+const old=cart.find(x=>x.name===p.dataset.name);
+
+if(old)old.quantity++;
+else cart.push({
+name:p.dataset.name,
+price:p.dataset.price,
+category:p.dataset.category,
+description:p.dataset.description,
+image:p.querySelector("img").src,
+quantity:1
+});
+
+localStorage.setItem("sShopCart",JSON.stringify(cart));
+
+cartCount.textContent=cart.reduce((a,x)=>a+x.quantity,0);
+
+};
+
+closePopup.onclick=()=>popup.classList.remove("active");
+
+popup.onclick=e=>{
+if(e.target===popup)popup.classList.remove("active");
+};
+
+cartCount.textContent=cart.reduce((a,x)=>a+x.quantity,0);
+
+updateFavorite();
+
+searchForm.onsubmit=e=>{
+e.preventDefault();
+const q=searchInput.value.trim();
+location.href=q?"../product.html?search="+encodeURIComponent(q):"../product.html";
+};
+</script>
+
+</body>
+</html>
+

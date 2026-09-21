@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Favorites - S Shop</title>
+
+    <link rel="stylesheet" href="design.css">
+
+    <style>
+        .favorites-title {
+            text-align: center;
+            margin: 40px 0 25px;
+            font-size: 35px;
+        }
+
+        .favorites {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .favorite-card {
+            position: relative;
+
+            background: rgba(20, 20, 20, 0.95);
+            border: 2px solid purple;
+            border-radius: 15px;
+
+            padding: 15px;
+
+            text-align: center;
+
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.35);
+
+            transition: 0.3s;
+        }
+
+        .favorite-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 0 25px rgba(255, 165, 0, 0.5);
+        }
+
+        .favorite-card img {
+            width: 100%;
+            height: 200px;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+        }
+
+        .favorite-card h2 {
+            margin: 15px 0 8px;
+        }
+
+        .favorite-price {
+            color: orange;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .favorite-category {
+            color: #bbb;
+        }
+
+        .remove-favorite {
+            margin-top: 15px;
+
+            border: none;
+            border-radius: 8px;
+
+            padding: 10px 15px;
+
+            background: orange;
+            color: black;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .remove-favorite:hover {
+            background: #8a2be2;
+            color: white;
+        }
+
+        .empty-favorites {
+            text-align: center;
+
+            font-size: 28px;
+
+            margin-top: 100px;
+
+            color: #aaa;
+        }
+
+        .empty-favorites a {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 12px 20px;
+
+            background: orange;
+
+            color: black;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .empty-favorites a:hover {
+            background: #8a2be2;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="head">
+
+        <a href="./index.html" style="text-decoration: none;">
+            <h1>S Shop</h1>
+        </a>
+
+        <nav>
+
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./product.html">
+                Products
+            </a>
+
+            <a href="./favorite.html">
+                ♥ Favorites
+            </a>
+
+            <a href="./about.html">
+                About Us
+            </a>
+
+        </nav>
+
+        <form class="search-form" id="searchForm">
+
+            <input type="search" id="searchInput" placeholder="Search items" autocomplete="off">
+
+            <button type="submit">
+                🔍
+            </button>
+
+        </form>
+
+        <a href="./cart.html" class="cart-link">
+
+            🛒 Cart
+
+            <span id="cartCount">
+                0
+            </span>
+
+        </a>
+
+    </header>
+
+
+    <main>
+
+        <h1 class="favorites-title">
+            ♥ My Favorites
+        </h1>
+
+        <div class="favorites" id="favorites"></div>
+
+        <div class="empty-favorites" id="emptyFavorites" style="display: none;">
+
+            Your favorites list is empty 😕
+            <br>
+
+            <a href="./product.html">
+                Browse Products
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        // =========================
+        // Favorites
+        // =========================
+
+        let favorites =
+            JSON.parse(
+                localStorage.getItem(
+                    "sShopFavorites"
+                )
+            ) || [];
+
+
+        const favoritesContainer =
+            document.getElementById(
+                "favorites"
+            );
+
+
+        const emptyFavorites =
+            document.getElementById(
+                "emptyFavorites"
+            );
+
+
+        // =========================
+        // Convert old favorites
+        // =========================
+
+        favorites =
+            favorites.filter(function (item) {
+
+                return typeof item === "object";
+
+            });
+
+
+        function saveFavorites() {
+
+            localStorage.setItem(
+                "sShopFavorites",
+                JSON.stringify(
+                    favorites
+                )
+            );
+
+        }
+
+
+        // =========================
+        // Render Favorites
+        // =========================
+
+        function renderFavorites() {
+
+            favoritesContainer.innerHTML = "";
+
+
+            if (favorites.length === 0) {
+
+                emptyFavorites.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            emptyFavorites.style.display =
+                "none";
+
+
+            favorites.forEach(function (product) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "favorite-card";
+
+
+                card.innerHTML = `
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+                <h2>
+                    ${product.name}
+                </h2>
+
+                <p class="favorite-price">
+                    ${product.price}
+                </p>
+
+                <p class="favorite-category">
+                    Category: ${product.category}
+                </p>
+
+                <button
+                    class="remove-favorite"
+                    type="button"
+                >
+                    ♥ Remove from Favorites
+                </button>
+
+            `;
+
+
+                const removeButton =
+                    card.querySelector(
+                        ".remove-favorite"
+                    );
+
+
+                removeButton.addEventListener(
+                    "click",
+                    function () {
+
+                        favorites =
+                            favorites.filter(
+                                function (item) {
+
+                                    return item.name !==
+                                        product.name;
+
+                                }
+                            );
+
+
+                        saveFavorites();
+
+                        renderFavorites();
+
+                    }
+                );
+
+
+                favoritesContainer.appendChild(
+                    card
+                );
+
+            });
+
+        }
+
+
+        // =========================
+        // Cart Count
+        // =========================
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "sShopCart"
+                )
+            ) || [];
+
+
+        const cartCount =
+            document.getElementById(
+                "cartCount"
+            );
+
+
+        function updateCartCount() {
+
+            let totalItems = 0;
+
+
+            cart.forEach(function (item) {
+
+                totalItems +=
+                    item.quantity;
+
+            });
+
+
+            cartCount.textContent =
+                totalItems;
+
+        }
+
+
+        // =========================
+        // Search
+        // =========================
+
+        const searchForm =
+            document.getElementById(
+                "searchForm"
+            );
+
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+
+        searchForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const searchValue =
+                    searchInput.value.trim();
+
+
+                if (searchValue === "") {
+
+                    window.location.href =
+                        "./product.html";
+
+                    return;
+
+                }
+
+
+                window.location.href =
+                    "./product.html?search=" +
+                    encodeURIComponent(
+                        searchValue
+                    );
+
+            }
+        );
+
+
+        // =========================
+        // Start
+        // =========================
+
+        saveFavorites();
+
+        renderFavorites();
+
+        updateCartCount();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming PC - S Shop</title>
+    <link rel="stylesheet" href="../design.css">
+</head>
+
+<body>
+
+<header class="head">
+
+    <a href="../index.html" style="text-decoration:none;">
+        <h1>S Shop</h1>
+    </a>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../product.html">Products</a>
+        <a href="../favorite.html">♥ Favorites</a>
+        <a href="../about.html">About Us</a>
+    </nav>
+
+    <form class="search-form" id="searchForm">
+        <input type="search" id="searchInput" placeholder="Search items" autocomplete="off">
+        <button type="submit">🔍</button>
+    </form>
+
+    <a href="../cart.html" class="cart-link">
+        🛒 Cart
+        <span id="cartCount">0</span>
+    </a>
+
+</header>
+
+<main>
+
+    <div class="products" id="products">
+
+        <div class="product-card"
+             data-name="Gaming PC"
+             data-price="200 $"
+             data-category="Gaming PC"
+             data-description="A powerful gaming PC designed for gaming and everyday use.">
+
+            <button class="favorite-button" type="button">♡</button>
+
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Vy8W--k6zL32YiDwYEQqWHMTSwpCiY1-Lhb1wam7jg&s=10"
+                 alt="Gaming PC">
+
+            <h2>Gaming PC</h2>
+            <p class="price">200 $</p>
+
+        </div>
+
+    </div>
+
+    <p id="noResults" style="display:none;font-size:xx-large;text-align:center;">
+        Nothing found 😕
+    </p>
+
+</main>
+
+<div class="popup" id="productPopup">
+
+    <div class="popup-content">
+
+        <button class="close-popup" id="closePopup">✕</button>
+
+        <img id="popupImage" src="" alt="Product">
+
+        <div class="popup-info">
+
+            <h2 id="popupName"></h2>
+
+            <p class="popup-price" id="popupPrice"></p>
+
+            <p id="popupCategory"></p>
+
+            <p id="popupDescription"></p>
+
+            <div class="rating-section">
+
+                <h3>Rate this product</h3>
+
+                <div class="stars" id="ratingStars">
+                    <button type="button" data-rating="1">★</button>
+                    <button type="button" data-rating="2">★</button>
+                    <button type="button" data-rating="3">★</button>
+                    <button type="button" data-rating="4">★</button>
+                    <button type="button" data-rating="5">★</button>
+                </div>
+
+                <p id="ratingText">No rating yet</p>
+
+            </div>
+
+            <button class="favorite-popup-button" id="favoritePopupButton">
+                ♡ Add to Favorites
+            </button>
+
+            <button class="buy-button" id="addToCartButton">
+                🛒 Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const products = document.querySelectorAll(".product-card");
+const popup = document.getElementById("productPopup");
+const popupImage = document.getElementById("popupImage");
+const popupName = document.getElementById("popupName");
+const popupPrice = document.getElementById("popupPrice");
+const popupCategory = document.getElementById("popupCategory");
+const popupDescription = document.getElementById("popupDescription");
+const closePopup = document.getElementById("closePopup");
+const cartCount = document.getElementById("cartCount");
+
+let favorites = JSON.parse(localStorage.getItem("sShopFavorites")) || [];
+let cart = JSON.parse(localStorage.getItem("sShopCart")) || [];
+let ratings = JSON.parse(localStorage.getItem("sShopRatings")) || {};
+
+let currentProduct = null;
+
+function isFavorite(name) {
+    return favorites.some(item =>
+        typeof item === "string" ? item === name : item.name === name
+    );
+}
+
+function updateFavorites() {
+    products.forEach(product => {
+
+        const button = product.querySelector(".favorite-button");
+        const name = product.dataset.name;
+
+        if (isFavorite(name)) {
+            button.textContent = "♥";
+            button.classList.add("favorite-active");
+        } else {
+            button.textContent = "♡";
+            button.classList.remove("favorite-active");
+        }
+
+    });
+}
+
+function toggleFavorite(product) {
+
+    const name = product.dataset.name;
+
+    if (isFavorite(name)) {
+
+        favorites = favorites.filter(item =>
+            typeof item === "string"
+                ? item !== name
+                : item.name !== name
+        );
+
+    } else {
+
+        favorites.push({
+            name: name,
+            price: product.dataset.price,
+            category: product.dataset.category,
+            description: product.dataset.description,
+            image: product.querySelector("img").src
+        });
+
+    }
+
+    localStorage.setItem("sShopFavorites", JSON.stringify(favorites));
+
+    updateFavorites();
+}
+
+function updateCartCount() {
+
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.quantity;
+    });
+
+    cartCount.textContent = total;
+}
+
+products.forEach(product => {
+
+    product.addEventListener("click", () => {
+
+        currentProduct = product;
+
+        popupName.textContent = product.dataset.name;
+        popupPrice.textContent = product.dataset.price;
+        popupCategory.textContent = "Category: " + product.dataset.category;
+        popupDescription.textContent = product.dataset.description;
+        popupImage.src = product.querySelector("img").src;
+
+        updateRating();
+
+        popup.classList.add("active");
+
+    });
+
+    product.querySelector(".favorite-button").addEventListener("click", event => {
+
+        event.stopPropagation();
+        toggleFavorite(product);
+
+    });
+
+});
+
+document.getElementById("favoritePopupButton").addEventListener("click", () => {
+
+    if (currentProduct) {
+        toggleFavorite(currentProduct);
+    }
+
+});
+
+document.getElementById("addToCartButton").addEventListener("click", () => {
+
+    if (!currentProduct) return;
+
+    const name = currentProduct.dataset.name;
+
+    const existing = cart.find(item => item.name === name);
+
+    if (existing) {
+        existing.quantity++;
+    } else {
+
+        cart.push({
+            name: name,
+            price: currentProduct.dataset.price,
+            category: currentProduct.dataset.category,
+            description: currentProduct.dataset.description,
+            image: currentProduct.querySelector("img").src,
+            quantity: 1
+        });
+
+    }
+
+    localStorage.setItem("sShopCart", JSON.stringify(cart));
+
+    updateCartCount();
+
+    document.getElementById("addToCartButton").textContent =
+        "✓ Added to Cart";
+
+    setTimeout(() => {
+        document.getElementById("addToCartButton").textContent =
+            "🛒 Add to Cart";
+    }, 1200);
+
+});
+
+function updateRating() {
+
+    if (!currentProduct) return;
+
+    const name = currentProduct.dataset.name;
+    const rating = ratings[name] || 0;
+
+    document.querySelectorAll("#ratingStars button").forEach(star => {
+
+        const value = Number(star.dataset.rating);
+
+        star.classList.toggle("active", value <= rating);
+
+    });
+
+    document.getElementById("ratingText").textContent =
+        rating === 0 ? "No rating yet" : rating + " / 5 ⭐";
+}
+
+document.querySelectorAll("#ratingStars button").forEach(star => {
+
+    star.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        if (!currentProduct) return;
+
+        const rating = Number(star.dataset.rating);
+
+        ratings[currentProduct.dataset.name] = rating;
+
+        localStorage.setItem(
+            "sShopRatings",
+            JSON.stringify(ratings)
+        );
+
+        updateRating();
+
+    });
+
+});
+
+closePopup.addEventListener("click", () => {
+    popup.classList.remove("active");
+});
+
+popup.addEventListener("click", event => {
+
+    if (event.target === popup) {
+        popup.classList.remove("active");
+    }
+
+});
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    const value =
+        document.getElementById("searchInput").value.trim();
+
+    if (value === "") {
+        window.location.href = "../product.html";
+        return;
+    }
+
+    window.location.href =
+        "../product.html?search=" +
+        encodeURIComponent(value);
+
+});
+
+updateCartCount();
+updateFavorites();
+</script>
+
+</body>
+</html>
+

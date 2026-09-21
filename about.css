@@ -1,0 +1,422 @@
+/* ========================
+   General
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(123, 44, 255, 0.12), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.08), transparent 30%),
+        #08080f;
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.head {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(17, 17, 28, 0.92);
+    backdrop-filter: blur(12px);
+
+    padding: 20px;
+    text-align: center;
+
+    border-bottom: 2px solid #7b2cff;
+    box-shadow: 0 5px 25px rgba(123, 44, 255, 0.15);
+}
+
+.head h1 {
+    margin: 0 0 15px;
+
+    color: #a855f7;
+    font-size: 32px;
+
+    text-shadow:
+        0 0 10px rgba(168, 85, 247, 0.7),
+        0 0 25px rgba(123, 44, 255, 0.4);
+}
+
+nav a {
+    position: relative;
+
+    color: #ddd;
+    text-decoration: none;
+
+    margin: 0 15px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+nav a::after {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background: #ff8c00;
+
+    transform: translateX(-50%);
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff8c00;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.6);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+
+/* =========================
+   Hero / About
+========================= */
+
+.about {
+    position: relative;
+
+    width: 85%;
+    max-width: 950px;
+
+    margin: 70px auto 40px;
+    padding: 65px 50px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(135deg,
+            rgba(123, 44, 255, 0.13),
+            rgba(17, 17, 28, 0.95));
+
+    border: 1px solid #29243b;
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 40px rgba(123, 44, 255, 0.12),
+        inset 0 0 30px rgba(123, 44, 255, 0.03);
+}
+
+
+/* Glow decoration */
+
+.about::before {
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    top: -120px;
+    left: -120px;
+
+    background: #7b2cff;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+    opacity: 0.18;
+}
+
+.about::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    bottom: -120px;
+    right: -100px;
+
+    background: #ff8c00;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+    opacity: 0.12;
+}
+
+.about h2 {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 0;
+
+    font-size: 48px;
+
+    background: linear-gradient(90deg,
+            #a855f7,
+            #ff8c00);
+
+
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 25px rgba(168, 85, 247, 0.2);
+}
+
+.about .welcome {
+    position: relative;
+    z-index: 2;
+
+    color: #ff8c00;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+.about p {
+    position: relative;
+    z-index: 2;
+
+    max-width: 750px;
+    margin: 15px auto;
+
+    color: #bbb;
+
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+
+/* =========================
+   Stats
+========================= */
+
+.stats {
+    width: 85%;
+    max-width: 950px;
+
+    margin: 30px auto 60px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.stat {
+    padding: 28px 20px;
+
+    text-align: center;
+
+    background: #11111c;
+
+    border: 1px solid #29243b;
+    border-radius: 15px;
+
+    transition: 0.3s;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.stat:hover {
+    transform: translateY(-8px);
+
+    border-color: #7b2cff;
+
+    box-shadow:
+        0 10px 35px rgba(123, 44, 255, 0.25),
+        0 0 20px rgba(123, 44, 255, 0.08);
+}
+
+.stat h3 {
+    margin: 0;
+
+    font-size: 34px;
+
+    color: #a855f7;
+}
+
+.stat p {
+    margin: 8px 0 0;
+
+    color: #999;
+}
+
+
+/* =========================
+   Info Cards
+========================= */
+
+.info {
+    width: 85%;
+    max-width: 1100px;
+
+    margin: 0 auto 70px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.info div {
+    position: relative;
+
+    padding: 35px 25px;
+
+    background:
+        linear-gradient(145deg,
+            #151522,
+            #0e0e17);
+
+    border: 1px solid #29243b;
+    border-radius: 16px;
+
+    text-align: center;
+
+    transition: 0.35s;
+
+    overflow: hidden;
+}
+
+.info div::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: linear-gradient(90deg,
+            #7b2cff,
+            #ff8c00);
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+
+    transition: 0.35s;
+}
+
+.info div:hover::before {
+    transform: scaleX(1);
+}
+
+.info div:hover {
+    transform: translateY(-10px);
+
+    border-color: #7b2cff;
+
+    box-shadow:
+        0 15px 40px rgba(123, 44, 255, 0.2);
+}
+
+.info h3 {
+    margin-top: 0;
+
+    font-size: 23px;
+
+    color: #ff8c00;
+
+    text-shadow: 0 0 12px rgba(255, 140, 0, 0.3);
+}
+
+.info p {
+    color: #aaa;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+    padding: 25px;
+
+    text-align: center;
+
+    background: #0d0d16;
+
+    border-top: 1px solid #29243b;
+
+    color: #777;
+}
+
+footer strong {
+    color: #a855f7;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 800px) {
+
+    .stats,
+    .info {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        width: 90%;
+        padding: 45px 25px;
+    }
+
+    .about h2 {
+        font-size: 36px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 8px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .head h1 {
+        font-size: 27px;
+    }
+
+    .about {
+        margin-top: 40px;
+    }
+
+    .about h2 {
+        font-size: 30px;
+    }
+
+    .about p {
+        font-size: 14px;
+    }
+
+    .stats,
+    .info {
+        width: 90%;
+    }
+}

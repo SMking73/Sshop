@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cart - S Shop</title>
+
+    <link rel="stylesheet" href="design.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+     Header
+========================== -->
+
+    <header class="head">
+
+        <h1>S Shop</h1>
+
+
+        <nav>
+
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./product.html">
+                Products
+            </a>
+
+            <a href="./about.html">
+                About Us
+            </a>
+
+        </nav>
+
+
+        <!-- Search -->
+
+        <form class="search-form" id="searchForm">
+
+            <input type="search" id="searchInput" placeholder="Search items" autocomplete="off">
+
+            <button type="submit">
+                🔍
+            </button>
+
+        </form>
+
+
+        <!-- Cart -->
+
+        <a href="./cart.html" class="cart-link">
+
+            🛒 Cart
+
+            <span id="cartCount">
+                0
+            </span>
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =========================
+     Cart
+========================== -->
+
+    <main class="cart-main">
+
+
+        <h1 class="cart-title">
+            🛒 Your Cart
+        </h1>
+
+
+        <!-- Cart Items -->
+
+        <div id="cartItems" class="cart-items"></div>
+
+
+        <!-- Empty Cart -->
+
+        <div id="emptyCart" class="empty-cart">
+
+            <div class="empty-cart-icon">
+                🛒
+            </div>
+
+            <h2>
+                Your Cart is Empty
+            </h2>
+
+            <p>
+                Add some products to your cart!
+            </p>
+
+            <a href="./product.html" class="continue-shopping">
+                🎮 Continue Shopping
+            </a>
+
+        </div>
+
+
+        <!-- Cart Bottom -->
+
+        <div id="cartBottom" class="cart-bottom">
+
+
+            <div class="cart-total">
+
+                <span>
+                    Total:
+                </span>
+
+                <strong id="cartTotal">
+                    0 $
+                </strong>
+
+            </div>
+
+
+            <div class="cart-actions">
+
+                <button id="clearCart" class="clear-cart" type="button">
+                    🗑️ Clear Cart
+                </button>
+
+
+                <button class="checkout-button" type="button" onclick="checkout()">
+                    💳 Checkout
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =========================
+     JavaScript
+========================== -->
+
+    <script>
+
+
+        // =========================
+        // Cart
+        // =========================
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("sShopCart")
+            ) || [];
+
+
+
+        const cartItems =
+            document.getElementById(
+                "cartItems"
+            );
+
+
+        const emptyCart =
+            document.getElementById(
+                "emptyCart"
+            );
+
+
+        const cartBottom =
+            document.getElementById(
+                "cartBottom"
+            );
+
+
+        const cartTotal =
+            document.getElementById(
+                "cartTotal"
+            );
+
+
+        const cartCount =
+            document.getElementById(
+                "cartCount"
+            );
+
+
+
+        // =========================
+        // Save Cart
+        // =========================
+
+        function saveCart() {
+
+            localStorage.setItem(
+                "sShopCart",
+                JSON.stringify(cart)
+            );
+
+        }
+
+
+
+        // =========================
+        // Update Cart Count
+        // =========================
+
+        function updateCartCount() {
+
+            let totalItems = 0;
+
+
+            cart.forEach(function (item) {
+
+                totalItems += item.quantity;
+
+            });
+
+
+            cartCount.textContent =
+                totalItems;
+
+        }
+
+
+
+        // =========================
+        // Render Cart
+        // =========================
+
+        function renderCart() {
+
+
+            cartItems.innerHTML = "";
+
+
+            // Empty
+
+            if (cart.length === 0) {
+
+                emptyCart.style.display =
+                    "flex";
+
+                cartBottom.style.display =
+                    "none";
+
+                updateCartCount();
+
+                return;
+
+            }
+
+
+            emptyCart.style.display =
+                "none";
+
+            cartBottom.style.display =
+                "block";
+
+
+
+            let total = 0;
+
+
+
+            cart.forEach(function (item, index) {
+
+
+                const price =
+                    parseFloat(
+                        item.price
+                            .replace("$", "")
+                            .trim()
+                    );
+
+
+                total +=
+                    price * item.quantity;
+
+
+
+                const itemElement =
+                    document.createElement("div");
+
+
+                itemElement.className =
+                    "cart-item";
+
+
+
+                itemElement.innerHTML = `
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                    class="cart-item-image"
+                >
+
+
+                <div class="cart-item-info">
+
+                    <h2>
+                        ${item.name}
+                    </h2>
+
+                    <p class="cart-item-category">
+                        ${item.category}
+                    </p>
+
+                    <p class="cart-item-price">
+                        ${item.price}
+                    </p>
+
+                </div>
+
+
+                <div class="quantity-control">
+
+                    <button
+                        type="button"
+                        onclick="decreaseQuantity(${index})"
+                    >
+                        −
+                    </button>
+
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+
+                    <button
+                        type="button"
+                        onclick="increaseQuantity(${index})"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+                <div class="cart-item-total">
+
+                    ${(price * item.quantity)
+                        .toFixed(2)
+                    } $
+
+                </div>
+
+
+                <button
+                    class="remove-cart-item"
+                    type="button"
+                    onclick="removeItem(${index})"
+                >
+                    ✕
+                </button>
+
+            `;
+
+
+                cartItems.appendChild(
+                    itemElement
+                );
+
+            });
+
+
+
+            cartTotal.textContent =
+                total.toFixed(2) + " $";
+
+
+            updateCartCount();
+
+        }
+
+
+
+        // =========================
+        // Increase
+        // =========================
+
+        function increaseQuantity(index) {
+
+            cart[index].quantity++;
+
+            saveCart();
+
+            renderCart();
+
+        }
+
+
+
+        // =========================
+        // Decrease
+        // =========================
+
+        function decreaseQuantity(index) {
+
+
+            if (
+                cart[index].quantity > 1
+            ) {
+
+                cart[index].quantity--;
+
+            }
+
+            else {
+
+                cart.splice(index, 1);
+
+            }
+
+
+            saveCart();
+
+            renderCart();
+
+        }
+
+
+
+        // =========================
+        // Remove
+        // =========================
+
+        function removeItem(index) {
+
+            cart.splice(index, 1);
+
+            saveCart();
+
+            renderCart();
+
+        }
+
+
+
+        // =========================
+        // Clear Cart
+        // =========================
+
+        document
+            .getElementById("clearCart")
+            .addEventListener(
+                "click",
+                function () {
+
+
+                    if (cart.length === 0) {
+                        return;
+                    }
+
+
+                    cart = [];
+
+
+                    saveCart();
+
+                    renderCart();
+
+                }
+            );
+
+
+
+        // =========================
+        // Checkout
+        // =========================
+
+        function checkout() {
+
+            alert(
+                "Checkout is not available yet! 🛒"
+            );
+
+        }
+
+
+
+        // =========================
+        // Search
+        // =========================
+
+        document
+            .getElementById("searchForm")
+            .addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const search =
+                        document
+                            .getElementById("searchInput")
+                            .value
+                            .trim();
+
+
+                    if (search === "") {
+
+                        window.location.href =
+                            "./product.html";
+
+                        return;
+
+                    }
+
+
+                    window.location.href =
+                        "./product.html?search=" +
+                        encodeURIComponent(search);
+
+                }
+            );
+
+
+
+        // =========================
+        // Start
+        // =========================
+
+        renderCart();
+
+    </script>
+
+
+</body>
+
+</html>

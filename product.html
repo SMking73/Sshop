@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products - S Shop</title>
+
+    <link rel="stylesheet" href="design.css">
+
+</head>
+
+<body>
+
+    <header class="head">
+
+        <a href="./index.html" style="text-decoration: none;">
+            <h1>S Shop</h1>
+        </a>
+
+        <nav>
+
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./product.html">
+                Products
+            </a>
+
+            <a href="./favorite.html">
+                💛 Favorites
+            </a>
+
+            <a href="./about.html">
+                About Us
+            </a>
+
+        </nav>
+
+        <form class="search-form" id="searchForm">
+
+            <input type="search" id="searchInput" placeholder="Search items" autocomplete="off">
+
+            <button type="submit">
+                🔍
+            </button>
+
+        </form>
+
+        <a href="./cart.html" class="cart-link">
+
+            🛒 Cart
+
+            <span id="cartCount">
+                0
+            </span>
+
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         Category Menu
+    ========================== -->
+
+    <div class="products-menu">
+
+        <button class="products-btn" onclick="toggleProducts()" type="button">
+            Category ▾
+        </button>
+
+        <div class="products-panel" id="productsPanel">
+
+            <a href="./products/computer.html">
+                🎮 Gaming PC
+            </a>
+
+            <a href="./products/mouse.html">
+                🖱️ Mouse
+            </a>
+
+            <a href="./products/keyboard.html">
+                ⌨️ Keyboard
+            </a>
+
+            <a href="./products/sound.html">
+                🎧 Headset
+            </a>
+
+            <a href="./products/console.html">
+                🎮 Console
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <main>
+
+        <div class="products" id="products">
+
+
+            <!-- =========================
+                 Gaming PC
+            ========================== -->
+
+            <div class="product-card" data-name="Gaming PC" data-price="200 $" data-category="Gaming PC"
+                data-description="A powerful gaming PC designed for gaming and everyday use.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Vy8W--k6zL32YiDwYEQqWHMTSwpCiY1-Lhb1wam7jg&s=10"
+                    alt="Gaming PC">
+
+                <h2>
+                    Gaming PC
+                </h2>
+
+                <p class="price">
+                    200 $
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 PS5
+            ========================== -->
+
+            <div class="product-card" data-name="PS5" data-price="399 $" data-category="Console"
+                data-description="PlayStation 5 gaming console with powerful performance and fast loading.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoEbOiuaMs9_rfew1FPnBFL6zjb2WnD6tw2LlvIJaDZw&s=10"
+                    alt="PS5">
+
+                <h2>
+                    PS5
+                </h2>
+
+                <p class="price">
+                    399 $
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Xbox Series X
+            ========================== -->
+
+            <div class="product-card" data-name="Xbox Series X" data-price="399 $" data-category="Console"
+                data-description="Xbox Series X with high performance, fast loading and excellent gaming experience.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="./media/images2.jpg" alt="Xbox Series X">
+
+                <h2>
+                    Xbox Series X
+                </h2>
+
+                <p class="price">
+                    399 $
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Gaming Headset
+            ========================== -->
+
+            <div class="product-card" data-name="Gaming Headset" data-price="89 $" data-category="Headset"
+                data-description="Gaming headset with clear sound and comfortable design for long gaming sessions.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf0h10Fj-Ee7h0-fQiUJUX3x2ppff97PUcnDJ9pYOksw&s=10"
+                    alt="Gaming Headset">
+
+                <h2>
+                    Gaming Headset
+                </h2>
+
+                <p class="price">
+                    89 $
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Gaming Keyboard
+            ========================== -->
+
+            <div class="product-card" data-name="Gaming Keyboard" data-price="75 $" data-category="Keyboard"
+                data-description="Mechanical gaming keyboard with RGB lighting and responsive keys.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4vYvYeeg9eZFARzpGKLaRYh2F3A8oL3Jftf4LMxT_mw&s=10"
+                    alt="Gaming Keyboard">
+
+                <h2>
+                    Gaming Keyboard
+                </h2>
+
+                <p class="price">
+                    75 $
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Gaming Mouse
+            ========================== -->
+
+            <div class="product-card" data-name="Gaming Mouse" data-price="45 $" data-category="Mouse"
+                data-description="Gaming mouse with accurate sensor, fast response and comfortable design.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt4RUFFxWcCag-TlWBmX4xeUL6BPR6DQoQtq7Ksxfww&s=10"
+                    alt="Gaming Mouse">
+
+                <h2>
+                    Gaming Mouse
+                </h2>
+
+                <p class="price">
+                    45 $
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Gaming Laptop
+            ========================== -->
+
+            <div class="product-card" data-name="Gaming Laptop" data-price="999 $" data-category="Laptop"
+                data-description="High performance gaming laptop designed for modern games and everyday use.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRflpAUan5ovh8vrD7ABwVs_JjDFrDQKhmCc9HVs60peQ&s=10"
+                    alt="Gaming Laptop">
+
+                <h2>
+                    Gaming Laptop
+                </h2>
+
+                <p class="price">
+                    999 $
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Gaming Chair
+            ========================== -->
+
+            <div class="product-card" data-name="Gaming Chair" data-price="249 $" data-category="Chair"
+                data-description="Comfortable gaming chair designed for long gaming sessions.">
+
+                <button class="favorite-button" type="button" aria-label="Add to favorites">
+                    ♡
+                </button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSRThfOt12wE0DHsw2dXEhMJMl1LX7byFoaN4x8TpA0Q&s"
+                    alt="Gaming Chair">
+
+                <h2>
+                    Gaming Chair
+                </h2>
+
+                <p class="price">
+                    249 $
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <p id="noResults" style="
+                display: none;
+                font-size: xx-large;
+                text-align: center;
+            ">
+            Nothing found 😕
+        </p>
+
+    </main>
+
+
+    <!-- =========================
+         Product Popup
+    ========================== -->
+
+    <div class="popup" id="productPopup">
+
+        <div class="popup-content">
+
+            <button class="close-popup" id="closePopup" type="button">
+                ✕
+            </button>
+
+            <img id="popupImage" src="" alt="Product">
+
+            <div class="popup-info">
+
+                <h2 id="popupName"></h2>
+
+                <p class="popup-price" id="popupPrice"></p>
+
+                <p id="popupCategory"></p>
+
+                <p id="popupDescription"></p>
+
+
+                <!-- =========================
+                     Rating System
+                ========================== -->
+
+                <div class="rating-section">
+
+                    <h3>
+                        Rate this product
+                    </h3>
+
+                    <div class="stars" id="ratingStars">
+
+                        <button type="button" data-rating="1">
+                            ★
+                        </button>
+
+                        <button type="button" data-rating="2">
+                            ★
+                        </button>
+
+                        <button type="button" data-rating="3">
+                            ★
+                        </button>
+
+                        <button type="button" data-rating="4">
+                            ★
+                        </button>
+
+                        <button type="button" data-rating="5">
+                            ★
+                        </button>
+
+                    </div>
+
+                    <p id="ratingText">
+                        No rating yet
+                    </p>
+
+                </div>
+
+
+                <!-- Popup Actions -->
+
+                <div class="popup-actions">
+
+                    <button class="favorite-popup-button" id="favoritePopupButton" type="button">
+                        💛 Add to Favorites
+                    </button>
+
+                    <button class="buy-button" id="addToCartButton" type="button">
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // =========================
+        // Category Menu
+        // =========================
+
+        function toggleProducts() {
+
+            const panel =
+                document.getElementById(
+                    "productsPanel"
+                );
+
+            panel.classList.toggle("show");
+
+        }
+
+
+        // =========================
+        // Search
+        // =========================
+
+        const searchForm =
+            document.getElementById(
+                "searchForm"
+            );
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+        const products =
+            document.querySelectorAll(
+                ".product-card"
+            );
+
+        const noResults =
+            document.getElementById(
+                "noResults"
+            );
+
+
+        function searchProducts(searchValue) {
+
+            searchValue =
+                searchValue
+                    .toLowerCase()
+                    .trim();
+
+            let found = false;
+
+
+            products.forEach(
+                function (product) {
+
+                    const productName =
+                        product.dataset.name
+                            .toLowerCase();
+
+                    const productCategory =
+                        product.dataset.category
+                            .toLowerCase();
+
+                    const productDescription =
+                        product.dataset.description
+                            .toLowerCase();
+
+
+                    if (
+
+                        searchValue === "" ||
+
+                        productName.includes(
+                            searchValue
+                        ) ||
+
+                        productCategory.includes(
+                            searchValue
+                        ) ||
+
+                        productDescription.includes(
+                            searchValue
+                        )
+
+                    ) {
+
+                        product.style.display =
+                            "";
+
+                        found = true;
+
+                    }
+
+                    else {
+
+                        product.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            if (found) {
+
+                noResults.style.display =
+                    "none";
+
+            }
+
+            else {
+
+                noResults.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        // =========================
+        // Search From URL
+        // =========================
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const searchText =
+            urlParams.get("search");
+
+
+        if (searchText !== null) {
+
+            searchInput.value =
+                searchText;
+
+            searchProducts(
+                searchText
+            );
+
+        }
+
+        else {
+
+            noResults.style.display =
+                "none";
+
+        }
+
+
+        // =========================
+        // Search Submit
+        // =========================
+
+        searchForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const searchValue =
+                    searchInput.value.trim();
+
+
+                if (searchValue === "") {
+
+                    window.location.href =
+                        "product.html";
+
+                    return;
+
+                }
+
+
+                window.location.href =
+                    "product.html?search=" +
+                    encodeURIComponent(
+                        searchValue
+                    );
+
+            }
+        );
+
+
+        // =========================
+        // Product Popup
+        // =========================
+
+        const popup =
+            document.getElementById(
+                "productPopup"
+            );
+
+        const popupImage =
+            document.getElementById(
+                "popupImage"
+            );
+
+        const popupName =
+            document.getElementById(
+                "popupName"
+            );
+
+        const popupPrice =
+            document.getElementById(
+                "popupPrice"
+            );
+
+        const popupCategory =
+            document.getElementById(
+                "popupCategory"
+            );
+
+        const popupDescription =
+            document.getElementById(
+                "popupDescription"
+            );
+
+        const closePopup =
+            document.getElementById(
+                "closePopup"
+            );
+
+
+        // =========================
+        // Favorite System
+        // =========================
+
+        let favorites =
+            JSON.parse(
+                localStorage.getItem(
+                    "sShopFavorites"
+                )
+            ) || [];
+
+
+        let currentFavoriteName = "";
+
+
+        function saveFavorites() {
+
+            localStorage.setItem(
+                "sShopFavorites",
+                JSON.stringify(
+                    favorites
+                )
+            );
+
+        }
+
+
+        function isFavorite(name) {
+
+            return favorites.some(
+                function (item) {
+
+                    if (
+                        typeof item === "string"
+                    ) {
+
+                        return item === name;
+
+                    }
+
+                    return item.name === name;
+
+                }
+            );
+
+        }
+
+
+        function updateFavoriteButtons() {
+
+            products.forEach(
+                function (product) {
+
+                    const name =
+                        product.dataset.name;
+
+                    const button =
+                        product.querySelector(
+                            ".favorite-button"
+                        );
+
+
+                    if (
+                        isFavorite(name)
+                    ) {
+
+                        button.textContent =
+                            "♥";
+
+                        button.classList.add(
+                            "favorite-active"
+                        );
+
+                    }
+
+                    else {
+
+                        button.textContent =
+                            "♡";
+
+                        button.classList.remove(
+                            "favorite-active"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            if (
+                currentFavoriteName !== ""
+            ) {
+
+                if (
+                    isFavorite(
+                        currentFavoriteName
+                    )
+                ) {
+
+                    favoritePopupButton.textContent =
+                        "♥ Remove from Favorites";
+
+                    favoritePopupButton.classList.add(
+                        "favorite-active"
+                    );
+
+                }
+
+                else {
+
+                    favoritePopupButton.textContent =
+                        "♡ Add to Favorites";
+
+                    favoritePopupButton.classList.remove(
+                        "favorite-active"
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        function toggleFavorite(name) {
+
+            const product =
+                Array.from(products).find(
+                    function (item) {
+
+                        return (
+                            item.dataset.name ===
+                            name
+                        );
+
+                    }
+                );
+
+
+            if (!product) {
+                return;
+            }
+
+
+            if (
+                isFavorite(name)
+            ) {
+
+                favorites =
+                    favorites.filter(
+                        function (item) {
+
+                            if (
+                                typeof item ===
+                                "string"
+                            ) {
+
+                                return (
+                                    item !== name
+                                );
+
+                            }
+
+                            return (
+                                item.name !== name
+                            );
+
+                        }
+                    );
+
+            }
+
+            else {
+
+                const image =
+                    product.querySelector(
+                        "img"
+                    ).src;
+
+
+                favorites.push({
+
+                    name:
+                        product.dataset.name,
+
+                    price:
+                        product.dataset.price,
+
+                    category:
+                        product.dataset.category,
+
+                    description:
+                        product.dataset.description,
+
+                    image:
+                        image
+
+                });
+
+            }
+
+
+            saveFavorites();
+
+            updateFavoriteButtons();
+
+        }
+
+
+        // =========================
+        // Popup Favorite
+        // =========================
+
+        const favoritePopupButton =
+            document.getElementById(
+                "favoritePopupButton"
+            );
+
+
+        favoritePopupButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+                toggleFavorite(
+                    currentFavoriteName
+                );
+
+            }
+        );
+
+
+        // =========================
+        // Rating System
+        // =========================
+
+        const ratingStars =
+            document.querySelectorAll(
+                "#ratingStars button"
+            );
+
+        const ratingText =
+            document.getElementById(
+                "ratingText"
+            );
+
+
+        let ratings =
+            JSON.parse(
+                localStorage.getItem(
+                    "sShopRatings"
+                )
+            ) || {};
+
+
+        let currentRatingProduct = "";
+
+
+        function saveRatings() {
+
+            localStorage.setItem(
+                "sShopRatings",
+                JSON.stringify(
+                    ratings
+                )
+            );
+
+        }
+
+
+        function updateRating() {
+
+            const rating =
+                ratings[
+                currentRatingProduct
+                ] || 0;
+
+
+            ratingStars.forEach(
+                function (star) {
+
+                    const value =
+                        Number(
+                            star.dataset.rating
+                        );
+
+
+                    if (
+                        value <= rating
+                    ) {
+
+                        star.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                    else {
+
+                        star.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            if (
+                rating === 0
+            ) {
+
+                ratingText.textContent =
+                    "No rating yet";
+
+            }
+
+            else {
+
+                ratingText.textContent =
+                    rating +
+                    " / 5 ⭐";
+
+            }
+
+        }
+
+
+        ratingStars.forEach(
+            function (star) {
+
+                star.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.stopPropagation();
+
+
+                        const rating =
+                            Number(
+                                star.dataset.rating
+                            );
+
+
+                        if (
+                            currentRatingProduct === ""
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        ratings[
+                            currentRatingProduct
+                        ] = rating;
+
+
+                        saveRatings();
+
+                        updateRating();
+
+                    }
+                );
+
+            }
+        );
+
+
+        // =========================
+        // Open Popup
+        // =========================
+
+        products.forEach(
+            function (product) {
+
+                product.addEventListener(
+                    "click",
+                    function () {
+
+                        const name =
+                            product.dataset.name;
+
+                        const price =
+                            product.dataset.price;
+
+                        const category =
+                            product.dataset.category;
+
+                        const description =
+                            product.dataset.description;
+
+                        const image =
+                            product.querySelector(
+                                "img"
+                            ).src;
+
+
+                        popupName.textContent =
+                            name;
+
+                        popupPrice.textContent =
+                            price;
+
+                        popupCategory.textContent =
+                            "Category: " +
+                            category;
+
+                        popupDescription.textContent =
+                            description;
+
+                        popupImage.src =
+                            image;
+
+
+                        currentFavoriteName =
+                            name;
+
+
+                        currentRatingProduct =
+                            name;
+
+
+                        updateFavoriteButtons();
+
+                        updateRating();
+
+
+                        popup.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                // Favorite button on card
+
+                const favoriteButton =
+                    product.querySelector(
+                        ".favorite-button"
+                    );
+
+
+                favoriteButton.addEventListener(
+                    "click",
+                    function (event) {
+
+                        event.stopPropagation();
+
+
+                        toggleFavorite(
+                            product.dataset.name
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        // =========================
+        // Close Popup
+        // =========================
+
+        closePopup.addEventListener(
+            "click",
+            function () {
+
+                popup.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        // =========================
+        // Close Outside
+        // =========================
+
+        popup.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === popup
+                ) {
+
+                    popup.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+
+        // =========================
+        // Shopping Cart
+        // =========================
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "sShopCart"
+                )
+            ) || [];
+
+
+        const cartCount =
+            document.getElementById(
+                "cartCount"
+            );
+
+
+        const addToCartButton =
+            document.getElementById(
+                "addToCartButton"
+            );
+
+
+        function saveCart() {
+
+            localStorage.setItem(
+                "sShopCart",
+                JSON.stringify(cart)
+            );
+
+        }
+
+
+        function updateCartCount() {
+
+            let totalItems = 0;
+
+
+            cart.forEach(
+                function (item) {
+
+                    totalItems +=
+                        item.quantity;
+
+                }
+            );
+
+
+            cartCount.textContent =
+                totalItems;
+
+        }
+
+
+        addToCartButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+
+                const name =
+                    popupName.textContent;
+
+                const price =
+                    popupPrice.textContent;
+
+                const category =
+                    popupCategory.textContent
+                        .replace(
+                            "Category: ",
+                            ""
+                        );
+
+                const description =
+                    popupDescription.textContent;
+
+                const image =
+                    popupImage.src;
+
+
+                const existingProduct =
+                    cart.find(
+                        function (item) {
+
+                            return (
+                                item.name ===
+                                name
+                            );
+
+                        }
+                    );
+
+
+                if (existingProduct) {
+
+                    existingProduct.quantity++;
+
+                }
+
+                else {
+
+                    cart.push({
+
+                        name:
+                            name,
+
+                        price:
+                            price,
+
+                        category:
+                            category,
+
+                        description:
+                            description,
+
+                        image:
+                            image,
+
+                        quantity:
+                            1
+
+                    });
+
+                }
+
+
+                saveCart();
+
+                updateCartCount();
+
+
+                addToCartButton.textContent =
+                    "✓ Added to Cart";
+
+                addToCartButton.style.background =
+                    "#8a2be2";
+
+                addToCartButton.style.color =
+                    "white";
+
+
+                setTimeout(
+                    function () {
+
+                        addToCartButton.textContent =
+                            "🛒 Add to Cart";
+
+                        addToCartButton.style.background =
+                            "orange";
+
+                        addToCartButton.style.color =
+                            "black";
+
+                    },
+                    1200
+                );
+
+            }
+        );
+
+
+        // =========================
+        // Start
+        // =========================
+
+        updateCartCount();
+
+        updateFavoriteButtons();
+
+    </script>
+
+</body>
+
+</html>

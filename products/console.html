@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console - S Shop</title>
+    <link rel="stylesheet" href="../design.css">
+</head>
+
+<body>
+
+    <header class="head">
+
+        <a href="../index.html" style="text-decoration:none;">
+            <h1>S Shop</h1>
+        </a>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../product.html">Products</a>
+            <a href="../favorite.html">♥ Favorites</a>
+            <a href="../about.html">About Us</a>
+        </nav>
+
+        <form class="search-form" id="searchForm">
+            <input type="search" id="searchInput" placeholder="Search items" autocomplete="off">
+            <button type="submit">🔍</button>
+        </form>
+
+        <a href="../cart.html" class="cart-link">
+            🛒 Cart <span id="cartCount">0</span>
+        </a>
+
+    </header>
+
+    <main>
+
+        <div class="products" id="products">
+
+            <div class="product-card" data-name="PS5" data-price="399 $" data-category="Console"
+                data-description="PlayStation 5 gaming console with powerful performance and fast loading.">
+
+                <button class="favorite-button">♡</button>
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoEbOiuaMs9_rfew1FPnBFL6zjb2WnD6tw2LlvIJaDZw&s=10"
+                    alt="PS5">
+
+                <h2>PS5</h2>
+                <p class="price">399 $</p>
+
+            </div>
+
+            <div class="product-card" data-name="Xbox Series X" data-price="399 $" data-category="Console"
+                data-description="Xbox Series X with high performance, fast loading and excellent gaming experience.">
+
+                <button class="favorite-button">♡</button>
+
+                <img src="../media/images2.jpg" alt="Xbox Series X">
+
+                <h2>Xbox Series X</h2>
+                <p class="price">399 $</p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <div class="popup" id="productPopup">
+
+        <div class="popup-content">
+
+            <button class="close-popup" id="closePopup">✕</button>
+
+            <img id="popupImage" src="" alt="Product">
+
+            <div class="popup-info">
+
+                <h2 id="popupName"></h2>
+                <p class="popup-price" id="popupPrice"></p>
+                <p id="popupCategory"></p>
+                <p id="popupDescription"></p>
+
+                <div class="rating-section">
+
+                    <h3>Rate this product</h3>
+
+                    <div class="stars" id="ratingStars">
+                        <button data-rating="1">★</button>
+                        <button data-rating="2">★</button>
+                        <button data-rating="3">★</button>
+                        <button data-rating="4">★</button>
+                        <button data-rating="5">★</button>
+                    </div>
+
+                    <p id="ratingText">No rating yet</p>
+
+                </div>
+
+                <button class="favorite-popup-button" id="favoritePopupButton">
+                    ♡ Add to Favorites
+                </button>
+
+                <button class="buy-button" id="addToCartButton">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = document.querySelectorAll(".product-card");
+        const popup = document.getElementById("productPopup");
+        const cartCount = document.getElementById("cartCount");
+
+        let favorites = JSON.parse(localStorage.getItem("sShopFavorites")) || [];
+        let cart = JSON.parse(localStorage.getItem("sShopCart")) || [];
+        let ratings = JSON.parse(localStorage.getItem("sShopRatings")) || {};
+        let currentProduct = null;
+
+        function isFavorite(name) {
+            return favorites.some(x => typeof x === "string" ? x === name : x.name === name);
+        }
+
+        function updateFavorites() {
+            products.forEach(p => {
+                const b = p.querySelector(".favorite-button");
+                b.textContent = isFavorite(p.dataset.name) ? "♥" : "♡";
+                b.classList.toggle("favorite-active", isFavorite(p.dataset.name));
+            });
+        }
+
+        function toggleFavorite(p) {
+
+            const name = p.dataset.name;
+
+            if (isFavorite(name)) {
+                favorites = favorites.filter(x => typeof x === "string" ? x !== name : x.name !== name);
+            } else {
+                favorites.push({
+                    name: name,
+                    price: p.dataset.price,
+                    category: p.dataset.category,
+                    description: p.dataset.description,
+                    image: p.querySelector("img").src
+                });
+            }
+
+            localStorage.setItem("sShopFavorites", JSON.stringify(favorites));
+            updateFavorites();
+        }
+
+        function updateCart() {
+            cartCount.textContent = cart.reduce((sum, x) => sum + x.quantity, 0);
+        }
+
+        products.forEach(p => {
+
+            p.addEventListener("click", () => {
+
+                currentProduct = p;
+
+                popupName.textContent = p.dataset.name;
+                popupPrice.textContent = p.dataset.price;
+                popupCategory.textContent = "Category: " + p.dataset.category;
+                popupDescription.textContent = p.dataset.description;
+                popupImage.src = p.querySelector("img").src;
+
+                updateRating();
+
+                popup.classList.add("active");
+
+            });
+
+            p.querySelector(".favorite-button").addEventListener("click", e => {
+                e.stopPropagation();
+                toggleFavorite(p);
+            });
+
+        });
+
+        document.getElementById("favoritePopupButton").onclick = () => {
+            if (currentProduct) toggleFavorite(currentProduct);
+        };
+
+        document.getElementById("addToCartButton").onclick = () => {
+
+            if (!currentProduct) return;
+
+            const name = currentProduct.dataset.name;
+            const old = cart.find(x => x.name === name);
+
+            if (old) old.quantity++;
+            else cart.push({
+                name: name,
+                price: currentProduct.dataset.price,
+                category: currentProduct.dataset.category,
+                description: currentProduct.dataset.description,
+                image: currentProduct.querySelector("img").src,
+                quantity: 1
+            });
+
+            localStorage.setItem("sShopCart", JSON.stringify(cart));
+            updateCart();
+
+        };
+
+        function updateRating() {
+
+            const rating = currentProduct ? ratings[currentProduct.dataset.name] || 0 : 0;
+
+            document.querySelectorAll("#ratingStars button").forEach(s => {
+                s.classList.toggle("active", Number(s.dataset.rating) <= rating);
+            });
+
+            document.getElementById("ratingText").textContent =
+                rating ? rating + " / 5 ⭐" : "No rating yet";
+        }
+
+        document.querySelectorAll("#ratingStars button").forEach(s => {
+            s.onclick = e => {
+
+                e.stopPropagation();
+
+                if (!currentProduct) return;
+
+                ratings[currentProduct.dataset.name] = Number(s.dataset.rating);
+
+                localStorage.setItem("sShopRatings", JSON.stringify(ratings));
+
+                updateRating();
+
+            };
+        });
+
+        document.getElementById("closePopup").onclick = () => {
+            popup.classList.remove("active");
+        };
+
+        popup.onclick = e => {
+            if (e.target === popup) popup.classList.remove("active");
+        };
+
+        document.getElementById("searchForm").onsubmit = e => {
+            e.preventDefault();
+
+            const q = document.getElementById("searchInput").value.trim();
+
+            if (q === "") {
+                location.href = "../product.html";
+                return;
+            }
+
+            location.href = "../product.html?search=" + encodeURIComponent(q);
+        };
+
+        updateCart();
+        updateFavorites();
+    </script>
+
+</body>
+
+</html>
