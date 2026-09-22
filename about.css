@@ -420,3 +420,53 @@ footer strong {
         width: 90%;
     }
 }
+
+/* =========================
+   THEME SWITCHER
+========================= */
+
+.theme-toggle {
+    flex: 0 0 auto;
+    min-width: 105px;
+    height: 40px;
+    padding: 0 13px;
+    border: 1px solid #343445;
+    border-radius: 9px;
+    background: #181824;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: #7b2cff;
+    border-color: #8a2be2;
+    transform: translateY(-2px);
+}
+
+html[data-theme="light"] body {
+    background: #eef0f7 !important;
+    color: #20202b !important;
+}
+
+html[data-theme="light"] .head {
+    background: rgba(255,255,255,0.94) !important;
+    border-bottom-color: #d9dbe7 !important;
+}
+
+html[data-theme="light"] .head h1,
+html[data-theme="light"] .head nav a {
+    color: #252535 !important;
+}
+
+html[data-theme="light"] .head nav a:hover {
+    color: #7b2cff !important;
+}
+
+html[data-theme="light"] .theme-toggle {
+    background: #fff;
+    color: #252535;
+    border-color: #cfd2df;
+}
