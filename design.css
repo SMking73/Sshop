@@ -77,31 +77,6 @@ body.popup-open {
     align-items: center;
 }
 
-.theme-toggle {
-    flex: 0 0 auto;
-    min-width: 105px;
-    height: 40px;
-    padding: 0 13px;
-    border: 1px solid #343445;
-    border-radius: 9px;
-    background: #181824;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-.theme-toggle:hover {
-    background: #7b2cff;
-    border-color: #8a2be2;
-    transform: translateY(-2px);
-}
-
 .search-form input {
     width: 250px;
     height: 40px;
@@ -679,6 +654,7 @@ main,
     gap: 10px;
     width: 100%;
     margin-top: 16px;
+    
 }
 
 .buy-button,
@@ -1059,11 +1035,6 @@ main,
         margin-left: 0;
     }
 
-    .theme-toggle {
-        width: 100%;
-        min-width: 0;
-    }
-
     .search-form input {
         width: 100%;
     }
@@ -1192,230 +1163,16 @@ main,
         margin: 0;
     }
 }
-
-
-/* =========================
-   THEME SWITCHER
-========================= */
-
-html,
-body,
-.head,
-.product-card,
-.popup-content,
-.popup-rating-summary,
-.service-card,
-.spec-item,
-.cart-item,
-.empty-cart,
-.cart-bottom,
-.cart-link,
-.products-panel,
-.search-form input,
-.favorite-button,
-.favorite-popup-button,
-.quantity-control button,
-.clear-cart {
-    transition: background-color 0.25s ease, color 0.25s ease,
-        border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.theme-toggle {
-    flex: 0 0 auto;
-    min-width: 105px;
-    height: 40px;
-    padding: 0 13px;
-    border: 1px solid #343445;
-    border-radius: 9px;
-    background: #181824;
+.favorite-popup-button {
+    border: 1px solid #ff6a00;
+    background: #1466fd;
     color: white;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s ease;
 }
 
-.theme-toggle:hover {
-    background: #7b2cff;
-    border-color: #8a2be2;
+.favorite-popup-button:hover,
+.favorite-popup-button.favorite-active {
+    background: #ff8c3a;
+    border-color: #ff8c3a;
+    color: white;
     transform: translateY(-2px);
-}
-
-html[data-theme="light"] {
-    background-color: #eef0f7;
-    background-image:
-        linear-gradient(rgba(245, 246, 252, 0.76), rgba(245, 246, 252, 0.76)),
-        url("./media/background.png");
-}
-
-html[data-theme="light"] body {
-    color: #171722;
-}
-
-html[data-theme="light"] .head {
-    background: rgba(255, 255, 255, 0.94);
-    border-bottom-color: #d9dbe7;
-}
-
-html[data-theme="light"] .head nav a {
-    color: #252535;
-}
-
-html[data-theme="light"] .head nav a:hover {
-    color: #7b2cff;
-}
-
-html[data-theme="light"] .head h1 {
-    color: #6f25d8;
-}
-
-html[data-theme="light"] .search-form input {
-    color: #20202b;
-    background: #ffffff;
-    border-color: #cfd2df;
-}
-
-html[data-theme="light"] .theme-toggle,
-html[data-theme="light"] .cart-link {
-    color: #252535;
-    background: #ffffff;
-    border-color: #cfd2df;
-}
-
-html[data-theme="light"] .products-btn {
-    color: #242432;
-}
-
-html[data-theme="light"] .products-panel {
-    background: #ffffff;
-    border-color: #8a2be2;
-}
-
-html[data-theme="light"] .products-panel a {
-    color: #252535;
-}
-
-html[data-theme="light"] .product-card,
-html[data-theme="light"] .cart-item,
-html[data-theme="light"] .empty-cart,
-html[data-theme="light"] .cart-bottom {
-    background: rgba(255, 255, 255, 0.94);
-    border-color: #d7d9e4;
-}
-
-html[data-theme="light"] .product-card img,
-html[data-theme="light"] .cart-item-image {
-    background: #eef0f5;
-}
-
-html[data-theme="light"] .product-card h2,
-html[data-theme="light"] .cart-title,
-html[data-theme="light"] .cart-item-info h2,
-html[data-theme="light"] .empty-cart h2,
-html[data-theme="light"] .cart-total,
-html[data-theme="light"] .quantity-control span {
-    color: #20202b;
-}
-
-html[data-theme="light"] .favorite-button {
-    background: rgba(255, 255, 255, 0.96);
-    color: #252535;
-    border-color: #cfd2df;
-}
-
-html[data-theme="light"] .popup {
-    background: rgba(20, 20, 32, 0.58);
-}
-
-html[data-theme="light"] .popup-content {
-    background: linear-gradient(145deg, #ffffff, #f0f1f7);
-    color: #20202b;
-    border-color: #8a2be2;
-}
-
-html[data-theme="light"] .popup-image-wrap {
-    background: radial-gradient(circle at center, #f1f2f8 0%, #e4e6ef 70%);
-    border-color: #d1d4df;
-}
-
-html[data-theme="light"] .popup-info h2,
-html[data-theme="light"] .service-card strong,
-html[data-theme="light"] .section-title h3,
-html[data-theme="light"] .rating-section h3 {
-    color: #20202b;
-}
-
-html[data-theme="light"] .popup-description {
-    color: #4e5060;
-}
-
-html[data-theme="light"] .popup-rating-summary,
-html[data-theme="light"] .service-card,
-html[data-theme="light"] .spec-item {
-    background: #ffffff;
-    border-color: #d6d8e3;
-}
-
-html[data-theme="light"] .spec-item strong {
-    color: #30313e;
-}
-
-html[data-theme="light"] .spec-item span,
-html[data-theme="light"] .service-card small,
-html[data-theme="light"] .section-title > span,
-html[data-theme="light"] .popup-bottom-note,
-html[data-theme="light"] #ratingText {
-    color: #6d6f7c;
-}
-
-html[data-theme="light"] .favorite-popup-button {
-    background: #ffffff;
-    color: #252535;
-    border-color: #cfd2df;
-}
-
-html[data-theme="light"] .quantity-control button {
-    background: #ffffff;
-    color: #252535;
-    border-color: #8a2be2;
-}
-
-html[data-theme="light"] .clear-cart {
-    background: #e1e3eb;
-    color: #252535;
-}
-
-html[data-theme="light"] .remove-cart-item {
-    color: #666978;
-}
-
-html[data-theme="light"] .popup-content::-webkit-scrollbar-track {
-    background: #e2e4ec;
-}
-
-
-/* =========================
-   THEME FORCE FIX
-========================= */
-
-html[data-theme="light"] body {
-    background-color: #f5f6fc !important;
-    color: #20202b !important;
-}
-
-html[data-theme="dark"] body {
-    background-color: transparent;
-    color: white;
-}
-
-html[data-theme="light"] .theme-toggle {
-    background: #ffffff !important;
-    color: #252535 !important;
-    border-color: #cfd2df !important;
-}
-
-html[data-theme="dark"] .theme-toggle {
-    background: #181824 !important;
-    color: #ffffff !important;
-    border-color: #343445 !important;
 }
