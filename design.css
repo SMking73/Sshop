@@ -77,6 +77,31 @@ body.popup-open {
     align-items: center;
 }
 
+.theme-toggle {
+    flex: 0 0 auto;
+    min-width: 105px;
+    height: 40px;
+    padding: 0 13px;
+    border: 1px solid #343445;
+    border-radius: 9px;
+    background: #181824;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: #7b2cff;
+    border-color: #8a2be2;
+    transform: translateY(-2px);
+}
+
 .search-form input {
     width: 250px;
     height: 40px;
@@ -1032,6 +1057,11 @@ main,
     .search-form {
         width: 100%;
         margin-left: 0;
+    }
+
+    .theme-toggle {
+        width: 100%;
+        min-width: 0;
     }
 
     .search-form input {
