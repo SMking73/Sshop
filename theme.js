@@ -1,30 +1,57 @@
 (() => {
-    const savedTheme = localStorage.getItem("sShopTheme") || "dark";
-    document.documentElement.setAttribute("data-theme", savedTheme);
+    const THEME_KEY = "sShopTheme";
 
-    function updateThemeButton() {
-        const button = document.getElementById("themeToggle");
-        if (!button) return;
-
-        const isLight = document.documentElement.getAttribute("data-theme") === "light";
-        button.textContent = isLight ? "☀️ Light" : "🌙 Dark";
-        button.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
-        button.title = isLight ? "Switch to dark mode" : "Switch to light mode";
+    function getTheme() {
+        try {
+            return localStorage.getItem(THEME_KEY) === "light" ? "light" : "dark";
+        } catch {
+            return "dark";
+        }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        updateThemeButton();
+    function setTheme(theme) {
+        const value = theme === "light" ? "light" : "dark";
+
+        document.documentElement.dataset.theme = value;
+        document.body?.setAttribute("data-theme", value);
 
         const button = document.getElementById("themeToggle");
-        if (!button) return;
+        if (button) {
+            const isLight = value === "light";
+            button.textContent = isLight ? "☀️ Light" : "🌙 Dark";
+            button.setAttribute(
+                "aria-label",
+                isLight ? "Switch to dark mode" : "Switch to light mode"
+            );
+            button.title = isLight ? "Switch to dark mode" : "Switch to light mode";
+        }
+
+        try {
+            localStorage.setItem(THEME_KEY, value);
+        } catch {}
+    }
+
+    function initTheme() {
+        setTheme(getTheme());
+
+        const button = document.getElementById("themeToggle");
+        if (!button || button.dataset.themeReady === "true") return;
+
+        button.dataset.themeReady = "true";
 
         button.addEventListener("click", () => {
-            const current = document.documentElement.getAttribute("data-theme") || "dark";
-            const next = current === "dark" ? "light" : "dark";
+            const current =
+                document.documentElement.dataset.theme === "light"
+                    ? "light"
+                    : "dark";
 
-            document.documentElement.setAttribute("data-theme", next);
-            localStorage.setItem("sShopTheme", next);
-            updateThemeButton();
+            setTheme(current === "light" ? "dark" : "light");
         });
-    });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initTheme);
+    } else {
+        initTheme();
+    }
 })();
