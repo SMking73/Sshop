@@ -1392,3 +1392,30 @@ html[data-theme="light"] .remove-cart-item {
 html[data-theme="light"] .popup-content::-webkit-scrollbar-track {
     background: #e2e4ec;
 }
+
+
+/* =========================
+   THEME FORCE FIX
+========================= */
+
+html[data-theme="light"] body {
+    background-color: #f5f6fc !important;
+    color: #20202b !important;
+}
+
+html[data-theme="dark"] body {
+    background-color: transparent;
+    color: white;
+}
+
+html[data-theme="light"] .theme-toggle {
+    background: #ffffff !important;
+    color: #252535 !important;
+    border-color: #cfd2df !important;
+}
+
+html[data-theme="dark"] .theme-toggle {
+    background: #181824 !important;
+    color: #ffffff !important;
+    border-color: #343445 !important;
+}
