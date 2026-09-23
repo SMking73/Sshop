@@ -1,21 +1,540 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>S Shop</title><link rel="stylesheet" href="design.css"></head><body>
-<header class="head"><a href="index.html" style="text-decoration:none;"><h1>S Shop</h1></a><nav><a href="./index.html">Home</a><a href="./product.html">Products</a><a href="./about.html">About Us</a><a href="./favorite.html">❤️ Favorites</a><a href="./cart.html">🛒 Cart <span id="cartCount">0</span></a></nav><form class="search-form" id="searchForm"><input type="search" id="searchInput" placeholder="Search items" autocomplete="off"><button type="submit">🔍</button></form>        <button id="themeToggle" class="theme-toggle" type="button">☀️ Light</button>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S Shop</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+
+    <header class="head">
+        <a href="index.html" style="text-decoration: none;">
+            <h1>S Shop</h1>
+        </a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="./product.html">Products</a>
+            <a href="./about.html">About Us</a>
+            <a href="./favorite.html">❤️ Favorites</a>
+            <a href="./cart.html">
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </a>
+        </nav>
+
+        <form class="search-form" id="searchForm">
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search items"
+                autocomplete="off"
+            >
+            <button type="submit">🔍</button>
+        </form>
+
+        <button id="themeToggle" class="theme-toggle" type="button">
+            ☀️ Light
+        </button>
     </header>
-<main class="main"><div><img class="hero" src="./media/ChatGPT Image Sep 6, 2026, 10_16_27 PM.png" alt="S Shop Gaming"></div><div class="products" id="products">
-<div class="product-card" data-name="Gaming PC" data-price="200 $" data-category="Gaming PC" data-description="A powerful gaming PC designed for gaming and everyday use." data-stock="In Stock" data-rating="4.8" data-reviews="124" data-shipping="Free Shipping" data-warranty="1 Year Warranty" data-specs="CPU|High Performance Processor;GPU|Dedicated Gaming Graphics;RAM|16 GB DDR4;Storage|512 GB SSD;Cooling|High Airflow Cooling"><button class="favorite-button" type="button">♡</button><img src="./media/pc.jpg" alt="Gaming PC"><h2>Gaming PC</h2><p class="price">200 $</p></div><div class="product-card" data-name="PS5" data-price="399 $" data-category="Console" data-description="PlayStation 5 gaming console with powerful performance, fast loading and a huge game library." data-stock="In Stock" data-rating="4.9" data-reviews="286" data-shipping="Free Shipping" data-warranty="1 Year Warranty" data-specs="CPU|8-Core AMD Zen 2;GPU|AMD RDNA 2;Storage|825 GB SSD;Resolution|Up to 4K;Features|Ray Tracing"><button class="favorite-button" type="button">♡</button><img src="./media/PS5.jpg" alt="PS5"><h2>PS5</h2><p class="price">399 $</p></div><div class="product-card" data-name="Xbox Series X" data-price="399 $" data-category="Console" data-description="Xbox Series X with high performance, fast loading and an excellent gaming experience." data-stock="In Stock" data-rating="4.8" data-reviews="211" data-shipping="Free Shipping" data-warranty="1 Year Warranty" data-specs="CPU|8-Core AMD Zen 2;GPU|AMD RDNA 2;Storage|1 TB NVMe SSD;Resolution|Up to 4K;Features|Quick Resume"><button class="favorite-button" type="button">♡</button><img src="./media/xbox.jpg" alt="Xbox Series X"><h2>Xbox Series X</h2><p class="price">399 $</p></div><div class="product-card" data-name="Gaming Headset" data-price="89 $" data-category="Headset" data-description="Gaming headset with clear sound, immersive audio and a comfortable design for long gaming sessions." data-stock="In Stock" data-rating="4.7" data-reviews="98" data-shipping="Free Shipping" data-warranty="1 Year Warranty" data-specs="Audio|Stereo Gaming Audio;Connection|3.5 mm / USB;Microphone|Built-in Mic;Lighting|RGB;Comfort|Padded Ear Cups"><button class="favorite-button" type="button">♡</button><img src="./media/Headset.jpg" alt="Gaming Headset"><h2>Gaming Headset</h2><p class="price">89 $</p></div><div class="product-card" data-name="Gaming Keyboard" data-price="75 $" data-category="Keyboard" data-description="Mechanical gaming keyboard with RGB lighting, responsive keys and a durable gaming-focused design." data-stock="In Stock" data-rating="4.8" data-reviews="143" data-shipping="Free Shipping" data-warranty="1 Year Warranty" data-specs="Switch|Mechanical;Connection|USB;Lighting|RGB;Layout|Full Size;Keys|Anti-Ghosting"><button class="favorite-button" type="button">♡</button><img src="./media/keyboard.jpg" alt="Gaming Keyboard"><h2>Gaming Keyboard</h2><p class="price">75 $</p></div><div class="product-card" data-name="Gaming Mouse" data-price="45 $" data-category="Mouse" data-description="Gaming mouse with an accurate sensor, fast response and a comfortable design for competitive and casual gaming." data-stock="In Stock" data-rating="4.6" data-reviews="87" data-shipping="Free Shipping" data-warranty="1 Year Warranty" data-specs="Sensor|High Precision Sensor;DPI|Up to 6400 DPI;Connection|USB;Buttons|6 Buttons;Lighting|RGB"><button class="favorite-button" type="button">♡</button><img src="./media/mouse.jpg" alt="Gaming Mouse"><h2>Gaming Mouse</h2><p class="price">45 $</p></div>
-</div></main>
-<div class="popup" id="productPopup" aria-hidden="true"><div class="popup-content" role="dialog" aria-modal="true"><button class="close-popup" id="closePopup" type="button">✕</button><div class="popup-gallery"><div class="popup-image-wrap"><img id="popupImage" src="" alt="Product"></div><div class="popup-mini-info"><span class="popup-badge">S SHOP PRODUCT</span><span class="popup-stock" id="popupStock">● In Stock</span></div></div><div class="popup-info"><div class="popup-heading"><div><p class="popup-category-label" id="popupCategory"></p><h2 id="popupName"></h2></div><div class="popup-rating-summary"><strong id="popupRating">0</strong><span>★</span><small id="popupReviews">(0 reviews)</small></div></div><p class="popup-price" id="popupPrice"></p><p class="popup-description" id="popupDescription"></p><div class="popup-service-row"><div class="service-card"><span>🚚</span><div><strong id="popupShipping">Free Shipping</strong><small>Fast delivery</small></div></div><div class="service-card"><span>🛡️</span><div><strong id="popupWarranty">Warranty</strong><small>Product protection</small></div></div><div class="service-card"><span>🔒</span><div><strong>Secure Payment</strong><small>Safe checkout</small></div></div></div><section class="specifications"><div class="section-title"><h3>⚙ Specifications</h3><span>Product Details</span></div><div class="spec-grid" id="popupSpecs"></div></section><section class="rating-section"><div class="section-title"><h3>⭐ Rate this product</h3><span id="ratingText">No rating yet</span></div><div class="stars" id="ratingStars"><button type="button" data-rating="1">★</button><button type="button" data-rating="2">★</button><button type="button" data-rating="3">★</button><button type="button" data-rating="4">★</button><button type="button" data-rating="5">★</button></div></section><div class="popup-actions"><button class="favorite-popup-button" id="favoritePopupButton" type="button">♡ Add to Favorites</button><button class="buy-button" id="addToCartButton" type="button">🛒 Add to Cart</button></div><div class="popup-bottom-note"><span>✓ Genuine Product</span><span>✓ Easy Returns</span><span>✓ Customer Support</span></div></div></div></div>
-<script>
-const products=document.querySelectorAll(".product-card"),popup=document.getElementById("productPopup"),cartCount=document.getElementById("cartCount"),pi=id=>document.getElementById(id),popupImage=pi("popupImage"),popupName=pi("popupName"),popupPrice=pi("popupPrice"),popupCategory=pi("popupCategory"),popupDescription=pi("popupDescription"),popupStock=pi("popupStock"),popupRating=pi("popupRating"),popupReviews=pi("popupReviews"),popupShipping=pi("popupShipping"),popupWarranty=pi("popupWarranty"),popupSpecs=pi("popupSpecs"),favoritePopupButton=pi("favoritePopupButton"),addToCartButton=pi("addToCartButton"),ratingText=pi("ratingText"),stars=document.querySelectorAll("#ratingStars button");
-let favorites=JSON.parse(localStorage.getItem("sShopFavorites"))||[],cart=JSON.parse(localStorage.getItem("sShopCart"))||[],ratings=JSON.parse(localStorage.getItem("sShopRatings"))||{},current=null;
-function fav(n){return favorites.some(x=>typeof x==="string"?x===n:x.name===n)}function updateFav(){products.forEach(p=>{let a=fav(p.dataset.name),b=p.querySelector(".favorite-button");b.textContent=a?"♥":"♡";b.classList.toggle("favorite-active",a)});if(current){let a=fav(current.dataset.name);favoritePopupButton.textContent=a?"♥ Remove from Favorites":"♡ Add to Favorites";favoritePopupButton.classList.toggle("favorite-active",a)}}function toggleFav(p){let n=p.dataset.name;if(fav(n))favorites=favorites.filter(x=>typeof x==="string"?x!==n:x.name!==n);else favorites.push({name:n,price:p.dataset.price,category:p.dataset.category,description:p.dataset.description,image:p.querySelector("img").src});localStorage.setItem("sShopFavorites",JSON.stringify(favorites));updateFav()}
-function renderSpecs(p){popupSpecs.innerHTML="";(p.dataset.specs||"").split(";").forEach(x=>{let a=x.split("|"),d=document.createElement("div");d.className="spec-item";d.innerHTML="<span></span><strong></strong>";d.firstChild.textContent=a[0];d.lastChild.textContent=a.slice(1).join("|");popupSpecs.appendChild(d)})}
-function updateRating(){if(!current)return;let r=Number(ratings[current.dataset.name]||0);stars.forEach(s=>s.classList.toggle("active",Number(s.dataset.rating)<=r));ratingText.textContent=r?"Your rating: "+r+" / 5":"No rating yet"}
-function open(p){current=p;popupImage.src=p.querySelector("img").src;popupName.textContent=p.dataset.name;popupPrice.textContent=p.dataset.price;popupCategory.textContent="Category / "+p.dataset.category;popupDescription.textContent=p.dataset.description;popupStock.textContent="● "+(p.dataset.stock||"In Stock");popupRating.textContent=p.dataset.rating||"0";popupReviews.textContent="("+(p.dataset.reviews||"0")+" reviews)";popupShipping.textContent=p.dataset.shipping||"Standard Shipping";popupWarranty.textContent=p.dataset.warranty||"Warranty Included";renderSpecs(p);updateFav();updateRating();popup.classList.add("active");popup.setAttribute("aria-hidden","false");document.body.classList.add("popup-open")}
-function close(){popup.classList.remove("active");popup.setAttribute("aria-hidden","true");document.body.classList.remove("popup-open");current=null}
-products.forEach(p=>{p.onclick=()=>open(p);p.querySelector(".favorite-button").onclick=e=>{e.stopPropagation();toggleFav(p)}});favoritePopupButton.onclick=e=>{e.stopPropagation();if(current)toggleFav(current)};stars.forEach(s=>s.onclick=e=>{e.stopPropagation();if(current){ratings[current.dataset.name]=Number(s.dataset.rating);localStorage.setItem("sShopRatings",JSON.stringify(ratings));updateRating()}});addToCartButton.onclick=e=>{e.stopPropagation();if(!current)return;let old=cart.find(x=>x.name===current.dataset.name);if(old)old.quantity++;else cart.push({name:current.dataset.name,price:current.dataset.price,category:current.dataset.category,description:current.dataset.description,image:current.querySelector("img").src,quantity:1});localStorage.setItem("sShopCart",JSON.stringify(cart));cartCount.textContent=cart.reduce((a,x)=>a+(Number(x.quantity)||0),0);let t=addToCartButton.textContent;addToCartButton.textContent="✓ Added to Cart";setTimeout(()=>addToCartButton.textContent=t,1200)};
-pi("closePopup").onclick=close;popup.onclick=e=>{if(e.target===popup)close()};document.addEventListener("keydown",e=>{if(e.key==="Escape"&&popup.classList.contains("active"))close()});cartCount.textContent=cart.reduce((a,x)=>a+(Number(x.quantity)||0),0);updateFav();
-document.getElementById("searchForm").onsubmit=e=>{e.preventDefault();let q=document.getElementById("searchInput").value.trim();location.href=q?"product.html?search="+encodeURIComponent(q):"product.html"};
-</script>    <script src="theme.js"></script>
-</body></html>
+
+    <main class="main">
+        <div>
+            <img
+                class="hero"
+                src="./media/ChatGPT Image Sep 6, 2026, 10_16_27 PM.png"
+                alt="S Shop Gaming"
+            >
+        </div>
+
+        <div class="products" id="products">
+
+            <div
+                class="product-card"
+                data-name="Gaming PC"
+                data-price="200 $"
+                data-category="Gaming PC"
+                data-description="A powerful gaming PC designed for gaming and everyday use."
+                data-stock="In Stock"
+                data-rating="4.8"
+                data-reviews="124"
+                data-shipping="Free Shipping"
+                data-warranty="1 Year Warranty"
+                data-specs="CPU|High Performance Processor;GPU|Dedicated Gaming Graphics;RAM|16 GB DDR4;Storage|512 GB SSD;Cooling|High Airflow Cooling"
+            >
+                <button class="favorite-button" type="button">♡</button>
+                <img src="./media/pc.jpg" alt="Gaming PC">
+                <h2>Gaming PC</h2>
+                <p class="price">200 $</p>
+            </div>
+
+            <div
+                class="product-card"
+                data-name="PS5"
+                data-price="399 $"
+                data-category="Console"
+                data-description="PlayStation 5 gaming console with powerful performance, fast loading and a huge game library."
+                data-stock="In Stock"
+                data-rating="4.9"
+                data-reviews="286"
+                data-shipping="Free Shipping"
+                data-warranty="1 Year Warranty"
+                data-specs="CPU|8-Core AMD Zen 2;GPU|AMD RDNA 2;Storage|825 GB SSD;Resolution|Up to 4K;Features|Ray Tracing"
+            >
+                <button class="favorite-button" type="button">♡</button>
+                <img src="./media/PS5.jpg" alt="PS5">
+                <h2>PS5</h2>
+                <p class="price">399 $</p>
+            </div>
+
+            <div
+                class="product-card"
+                data-name="Xbox Series X"
+                data-price="399 $"
+                data-category="Console"
+                data-description="Xbox Series X with high performance, fast loading and an excellent gaming experience."
+                data-stock="In Stock"
+                data-rating="4.8"
+                data-reviews="211"
+                data-shipping="Free Shipping"
+                data-warranty="1 Year Warranty"
+                data-specs="CPU|8-Core AMD Zen 2;GPU|AMD RDNA 2;Storage|1 TB NVMe SSD;Resolution|Up to 4K;Features|Quick Resume"
+            >
+                <button class="favorite-button" type="button">♡</button>
+                <img src="./media/xbox.jpg" alt="Xbox Series X">
+                <h2>Xbox Series X</h2>
+                <p class="price">399 $</p>
+            </div>
+
+            <div
+                class="product-card"
+                data-name="Gaming Headset"
+                data-price="89 $"
+                data-category="Headset"
+                data-description="Gaming headset with clear sound, immersive audio and a comfortable design for long gaming sessions."
+                data-stock="In Stock"
+                data-rating="4.7"
+                data-reviews="98"
+                data-shipping="Free Shipping"
+                data-warranty="1 Year Warranty"
+                data-specs="Audio|Stereo Gaming Audio;Connection|3.5 mm / USB;Microphone|Built-in Mic;Lighting|RGB;Comfort|Padded Ear Cups"
+            >
+                <button class="favorite-button" type="button">♡</button>
+                <img src="./media/Headset.jpg" alt="Gaming Headset">
+                <h2>Gaming Headset</h2>
+                <p class="price">89 $</p>
+            </div>
+
+            <div
+                class="product-card"
+                data-name="Gaming Keyboard"
+                data-price="75 $"
+                data-category="Keyboard"
+                data-description="Mechanical gaming keyboard with RGB lighting, responsive keys and a durable gaming-focused design."
+                data-stock="In Stock"
+                data-rating="4.8"
+                data-reviews="143"
+                data-shipping="Free Shipping"
+                data-warranty="1 Year Warranty"
+                data-specs="Switch|Mechanical;Connection|USB;Lighting|RGB;Layout|Full Size;Keys|Anti-Ghosting"
+            >
+                <button class="favorite-button" type="button">♡</button>
+                <img src="./media/keyboard.jpg" alt="Gaming Keyboard">
+                <h2>Gaming Keyboard</h2>
+                <p class="price">75 $</p>
+            </div>
+
+            <div
+                class="product-card"
+                data-name="Gaming Mouse"
+                data-price="45 $"
+                data-category="Mouse"
+                data-description="Gaming mouse with an accurate sensor, fast response and a comfortable design for competitive and casual gaming."
+                data-stock="In Stock"
+                data-rating="4.6"
+                data-reviews="87"
+                data-shipping="Free Shipping"
+                data-warranty="1 Year Warranty"
+                data-specs="Sensor|High Precision Sensor;DPI|Up to 6400 DPI;Connection|USB;Buttons|6 Buttons;Lighting|RGB"
+            >
+                <button class="favorite-button" type="button">♡</button>
+                <img src="./media/mouse.jpg" alt="Gaming Mouse">
+                <h2>Gaming Mouse</h2>
+                <p class="price">45 $</p>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="popup" id="productPopup" aria-hidden="true">
+        <div class="popup-content" role="dialog" aria-modal="true">
+
+            <button class="close-popup" id="closePopup" type="button">✕</button>
+
+            <div class="popup-gallery">
+                <div class="popup-image-wrap">
+                    <img id="popupImage" src="" alt="Product">
+                </div>
+
+                <div class="popup-mini-info">
+                    <span class="popup-badge">S SHOP PRODUCT</span>
+                    <span class="popup-stock" id="popupStock">● In Stock</span>
+                </div>
+            </div>
+
+            <div class="popup-info">
+
+                <div class="popup-heading">
+                    <div>
+                        <p class="popup-category-label" id="popupCategory"></p>
+                        <h2 id="popupName"></h2>
+                    </div>
+
+                    <div class="popup-rating-summary">
+                        <strong id="popupRating">0</strong>
+                        <span>★</span>
+                        <small id="popupReviews">(0 reviews)</small>
+                    </div>
+                </div>
+
+                <p class="popup-price" id="popupPrice"></p>
+                <p class="popup-description" id="popupDescription"></p>
+
+                <div class="popup-service-row">
+
+                    <div class="service-card">
+                        <span>🚚</span>
+                        <div>
+                            <strong id="popupShipping">Free Shipping</strong>
+                            <small>Fast delivery</small>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span>🛡️</span>
+                        <div>
+                            <strong id="popupWarranty">Warranty</strong>
+                            <small>Product protection</small>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <span>🔒</span>
+                        <div>
+                            <strong>Secure Payment</strong>
+                            <small>Safe checkout</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <section class="specifications">
+                    <div class="section-title">
+                        <h3>⚙ Specifications</h3>
+                        <span>Product Details</span>
+                    </div>
+
+                    <div class="spec-grid" id="popupSpecs"></div>
+                </section>
+
+                <section class="rating-section">
+                    <div class="section-title">
+                        <h3>⭐ Rate this product</h3>
+                        <span id="ratingText">No rating yet</span>
+                    </div>
+
+                    <div class="stars" id="ratingStars">
+                        <button type="button" data-rating="1">★</button>
+                        <button type="button" data-rating="2">★</button>
+                        <button type="button" data-rating="3">★</button>
+                        <button type="button" data-rating="4">★</button>
+                        <button type="button" data-rating="5">★</button>
+                    </div>
+                </section>
+
+                <div class="popup-actions">
+                    <button
+                        class="favorite-popup-button"
+                        id="favoritePopupButton"
+                        type="button"
+                    >
+                        ♡ Add to Favorites
+                    </button>
+
+                    <button
+                        class="buy-button"
+                        id="addToCartButton"
+                        type="button"
+                    >
+                        🛒 Add to Cart
+                    </button>
+                </div>
+
+                <div class="popup-bottom-note">
+                    <span>✓ Genuine Product</span>
+                    <span>✓ Easy Returns</span>
+                    <span>✓ Customer Support</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+const products = document.querySelectorAll(".product-card");
+const popup = document.getElementById("productPopup");
+const cartCount = document.getElementById("cartCount");
+const pi = (id) => document.getElementById(id);
+
+const popupImage = pi("popupImage");
+const popupName = pi("popupName");
+const popupPrice = pi("popupPrice");
+const popupCategory = pi("popupCategory");
+const popupDescription = pi("popupDescription");
+const popupStock = pi("popupStock");
+const popupRating = pi("popupRating");
+const popupReviews = pi("popupReviews");
+const popupShipping = pi("popupShipping");
+const popupWarranty = pi("popupWarranty");
+const popupSpecs = pi("popupSpecs");
+const favoritePopupButton = pi("favoritePopupButton");
+const addToCartButton = pi("addToCartButton");
+const ratingText = pi("ratingText");
+const stars = document.querySelectorAll("#ratingStars button");
+
+let favorites = JSON.parse(localStorage.getItem("sShopFavorites")) || [];
+let cart = JSON.parse(localStorage.getItem("sShopCart")) || [];
+let ratings = JSON.parse(localStorage.getItem("sShopRatings")) || {};
+let current = null;
+
+function fav(name) {
+    return favorites.some((item) =>
+        typeof item === "string" ? item === name : item.name === name
+    );
+}
+
+function updateFav() {
+    products.forEach((product) => {
+        const active = fav(product.dataset.name);
+        const button = product.querySelector(".favorite-button");
+
+        button.textContent = active ? "♥" : "♡";
+        button.classList.toggle("favorite-active", active);
+    });
+
+    if (current) {
+        const active = fav(current.dataset.name);
+
+        favoritePopupButton.textContent = active
+            ? "♥ Remove from Favorites"
+            : "♡ Add to Favorites";
+
+        favoritePopupButton.classList.toggle("favorite-active", active);
+    }
+}
+
+function toggleFav(product) {
+    const name = product.dataset.name;
+
+    if (fav(name)) {
+        favorites = favorites.filter((item) =>
+            typeof item === "string" ? item !== name : item.name !== name
+        );
+    } else {
+        favorites.push({
+            name,
+            price: product.dataset.price,
+            category: product.dataset.category,
+            description: product.dataset.description,
+            image: product.querySelector("img").src
+        });
+    }
+
+    localStorage.setItem("sShopFavorites", JSON.stringify(favorites));
+    updateFav();
+}
+
+function renderSpecs(product) {
+    popupSpecs.innerHTML = "";
+
+    (product.dataset.specs || "").split(";").forEach((spec) => {
+        const parts = spec.split("|");
+        const item = document.createElement("div");
+
+        item.className = "spec-item";
+        item.innerHTML = "<span></span><strong></strong>";
+
+        item.firstChild.textContent = parts[0];
+        item.lastChild.textContent = parts.slice(1).join("|");
+
+        popupSpecs.appendChild(item);
+    });
+}
+
+function updateRating() {
+    if (!current) {
+        return;
+    }
+
+    const rating = Number(ratings[current.dataset.name] || 0);
+
+    stars.forEach((star) => {
+        star.classList.toggle(
+            "active",
+            Number(star.dataset.rating) <= rating
+        );
+    });
+
+    ratingText.textContent = rating
+        ? `Your rating: ${rating} / 5`
+        : "No rating yet";
+}
+
+function openProduct(product) {
+    current = product;
+
+    popupImage.src = product.querySelector("img").src;
+    popupName.textContent = product.dataset.name;
+    popupPrice.textContent = product.dataset.price;
+    popupCategory.textContent = "Category / " + product.dataset.category;
+    popupDescription.textContent = product.dataset.description;
+    popupStock.textContent = "● " + (product.dataset.stock || "In Stock");
+    popupRating.textContent = product.dataset.rating || "0";
+    popupReviews.textContent = "(" + (product.dataset.reviews || "0") + " reviews)";
+    popupShipping.textContent =
+        product.dataset.shipping || "Standard Shipping";
+    popupWarranty.textContent =
+        product.dataset.warranty || "Warranty Included";
+
+    renderSpecs(product);
+    updateFav();
+    updateRating();
+
+    popup.classList.add("active");
+    popup.setAttribute("aria-hidden", "false");
+    document.body.classList.add("popup-open");
+}
+
+function closePopup() {
+    popup.classList.remove("active");
+    popup.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("popup-open");
+    current = null;
+}
+
+products.forEach((product) => {
+    product.onclick = () => openProduct(product);
+
+    product.querySelector(".favorite-button").onclick = (event) => {
+        event.stopPropagation();
+        toggleFav(product);
+    };
+});
+
+favoritePopupButton.onclick = (event) => {
+    event.stopPropagation();
+
+    if (current) {
+        toggleFav(current);
+    }
+};
+
+stars.forEach((star) => {
+    star.onclick = (event) => {
+        event.stopPropagation();
+
+        if (current) {
+            ratings[current.dataset.name] = Number(star.dataset.rating);
+
+            localStorage.setItem(
+                "sShopRatings",
+                JSON.stringify(ratings)
+            );
+
+            updateRating();
+        }
+    };
+});
+
+addToCartButton.onclick = (event) => {
+    event.stopPropagation();
+
+    if (!current) {
+        return;
+    }
+
+    const oldItem = cart.find(
+        (item) => item.name === current.dataset.name
+    );
+
+    if (oldItem) {
+        oldItem.quantity++;
+    } else {
+        cart.push({
+            name: current.dataset.name,
+            price: current.dataset.price,
+            category: current.dataset.category,
+            description: current.dataset.description,
+            image: current.querySelector("img").src,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("sShopCart", JSON.stringify(cart));
+
+    cartCount.textContent = cart.reduce(
+        (total, item) => total + (Number(item.quantity) || 0),
+        0
+    );
+
+    const originalText = addToCartButton.textContent;
+
+    addToCartButton.textContent = "✓ Added to Cart";
+
+    setTimeout(() => {
+        addToCartButton.textContent = originalText;
+    }, 1200);
+};
+
+pi("closePopup").onclick = closePopup;
+
+popup.onclick = (event) => {
+    if (event.target === popup) {
+        closePopup();
+    }
+};
+
+document.addEventListener("keydown", (event) => {
+    if (
+        event.key === "Escape" &&
+        popup.classList.contains("active")
+    ) {
+        closePopup();
+    }
+});
+
+cartCount.textContent = cart.reduce(
+    (total, item) => total + (Number(item.quantity) || 0),
+    0
+);
+
+updateFav();
+
+document.getElementById("searchForm").onsubmit = (event) => {
+    event.preventDefault();
+
+    const query = document.getElementById("searchInput").value.trim();
+
+    location.href = query
+        ? "product.html?search=" + encodeURIComponent(query)
+        : "product.html";
+};
+    </script>
+
+    <script src="theme.js"></script>
+
+</body>
+</html>
