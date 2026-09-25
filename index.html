@@ -485,6 +485,9 @@ addToCartButton.onclick = (event) => {
 
     localStorage.setItem("sShopCart", JSON.stringify(cart));
 
+    // Browser + in-site notification
+    showCartNotification(current.dataset.name);
+
     cartCount.textContent = cart.reduce(
         (total, item) => total + (Number(item.quantity) || 0),
         0
