@@ -1,0 +1,83 @@
+.sshop-footer {
+    margin-top: 70px;
+    background: linear-gradient(180deg, rgba(16, 16, 26, 0.98), rgba(11, 11, 18, 1));
+    border-top: 1px solid rgba(139, 61, 255, 0.28);
+    box-shadow: 0 -12px 40px rgba(139, 61, 255, 0.08);
+    color: #f4f1ff;
+}
+
+.sshop-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 28px 34px;
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+    gap: 36px;
+}
+
+.sshop-footer-brand h2 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #8b3dff, #ff6a00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sshop-footer-brand p {
+    margin: 0;
+    max-width: 300px;
+    color: rgba(255, 255, 255, 0.66);
+    line-height: 1.7;
+}
+
+.sshop-footer-column h3 {
+    margin: 4px 0 15px;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.sshop-footer-column a {
+    display: block;
+    width: fit-content;
+    margin: 9px 0;
+    color: rgba(255, 255, 255, 0.66);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sshop-footer-column a:hover {
+    color: #ff6a00;
+    transform: translateX(4px);
+}
+
+.sshop-footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 28px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 13px;
+}
+
+.sshop-footer-bottom strong {
+    color: #8b3dff;
+}
+
+@media (max-width: 800px) {
+    .sshop-footer-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+    }
+}
+
+@media (max-width: 520px) {
+    .sshop-footer-inner {
+        grid-template-columns: 1fr;
+        padding: 38px 20px 28px;
+    }
+
+    .sshop-footer-bottom {
+        padding: 16px 20px;
+    }
+}
