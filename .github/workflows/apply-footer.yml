@@ -1,0 +1,151 @@
+name: Apply S Shop Footer
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  apply-footer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Add footer to every HTML page
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          footer_css = r'''
+          .sshop-footer {
+              margin-top: 70px;
+              background: linear-gradient(180deg, rgba(16, 16, 26, 0.98), rgba(11, 11, 18, 1));
+              border-top: 1px solid rgba(139, 61, 255, 0.28);
+              box-shadow: 0 -12px 40px rgba(139, 61, 255, 0.08);
+              color: #f4f1ff;
+          }
+
+          .sshop-footer-inner {
+              max-width: 1200px;
+              margin: 0 auto;
+              padding: 48px 28px 34px;
+              display: grid;
+              grid-template-columns: 1.5fr repeat(3, 1fr);
+              gap: 36px;
+          }
+
+          .sshop-footer-brand h2 {
+              margin: 0 0 12px;
+              font-size: 30px;
+              font-weight: 800;
+              background: linear-gradient(90deg, #8b3dff, #ff6a00);
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+          }
+
+          .sshop-footer-brand p {
+              margin: 0;
+              max-width: 300px;
+              color: rgba(255, 255, 255, 0.66);
+              line-height: 1.7;
+          }
+
+          .sshop-footer-column h3 {
+              margin: 4px 0 15px;
+              font-size: 15px;
+              color: #ffffff;
+          }
+
+          .sshop-footer-column a {
+              display: block;
+              width: fit-content;
+              margin: 9px 0;
+              color: rgba(255, 255, 255, 0.66);
+              text-decoration: none;
+              transition: color 0.2s ease, transform 0.2s ease;
+          }
+
+          .sshop-footer-column a:hover {
+              color: #ff6a00;
+              transform: translateX(4px);
+          }
+
+          .sshop-footer-bottom {
+              border-top: 1px solid rgba(255, 255, 255, 0.08);
+              padding: 18px 28px;
+              text-align: center;
+              color: rgba(255, 255, 255, 0.48);
+              font-size: 13px;
+          }
+
+          .sshop-footer-bottom strong {
+              color: #8b3dff;
+          }
+
+          @media (max-width: 800px) {
+              .sshop-footer-inner {
+                  grid-template-columns: repeat(2, 1fr);
+                  gap: 28px;
+              }
+          }
+
+          @media (max-width: 520px) {
+              .sshop-footer-inner {
+                  grid-template-columns: 1fr;
+                  padding: 38px 20px 28px;
+              }
+
+              .sshop-footer-bottom {
+                  padding: 16px 20px;
+              }
+          }
+          '''
+
+          footer_css_path = Path('footer.css')
+          footer_css_path.write_text(footer_css.strip() + '\n', encoding='utf-8')
+
+          def build_footer(prefix: str) -> str:
+              return f'''\n    <footer class="sshop-footer">\n        <div class="sshop-footer-inner">\n            <div class="sshop-footer-brand">\n                <h2>S SHOP</h2>\n                <p>Modern gaming and technology products for gamers and tech lovers.</p>\n            </div>\n\n            <div class="sshop-footer-column">\n                <h3>Quick Links</h3>\n                <a href="{prefix}index.html">Home</a>\n                <a href="{prefix}product.html">Products</a>\n                <a href="{prefix}favorite.html">Favorites</a>\n                <a href="{prefix}cart.html">Cart</a>\n            </div>\n\n            <div class="sshop-footer-column">\n                <h3>Categories</h3>\n                <a href="{prefix}products/computer.html">Gaming PC</a>\n                <a href="{prefix}products/console.html">Consoles</a>\n                <a href="{prefix}products/keyboard.html">Keyboards</a>\n                <a href="{prefix}products/mouse.html">Mice</a>\n            </div>\n\n            <div class="sshop-footer-column">\n                <h3>About</h3>\n                <a href="{prefix}about.html">About S Shop</a>\n                <a href="https://github.com/SMking73/Sshop" target="_blank" rel="noopener noreferrer">GitHub</a>\n            </div>\n        </div>\n\n        <div class="sshop-footer-bottom">\n            © 2026 <strong>S Shop</strong> · Built for gamers 🎮\n        </div>\n    </footer>\n'''
+
+          for path in sorted(Path('.').rglob('*.html')):
+              if any(part in {'.git', 'node_modules'} for part in path.parts):
+                  continue
+
+              text = path.read_text(encoding='utf-8')
+              prefix = '../' if len(path.parts) > 1 else ''
+              link = f'<link rel="stylesheet" href="{prefix}footer.css">'
+
+              if 'href="' + prefix + 'footer.css"' not in text:
+                  text = re.sub(r'(?i)</head>', f'    {link}\n</head>', text, count=1)
+
+              footer = build_footer(prefix)
+              if re.search(r'(?is)<footer\b[^>]*class=["\'][^"\']*sshop-footer[^"\']*["\'][^>]*>.*?</footer>', text):
+                  text = re.sub(r'(?is)\s*<footer\b[^>]*class=["\'][^"\']*sshop-footer[^"\']*["\'][^>]*>.*?</footer>\s*', footer, text, count=1)
+              elif re.search(r'(?is)<footer\b[^>]*>.*?</footer>', text):
+                  text = re.sub(r'(?is)\s*<footer\b[^>]*>.*?</footer>\s*', footer, text, count=1)
+              else:
+                  text = re.sub(r'(?i)</body>', footer + '\n</body>', text, count=1)
+
+              path.write_text(text, encoding='utf-8')
+
+          workflow = Path('.github/workflows/apply-footer.yml')
+          if workflow.exists():
+              workflow.unlink()
+
+      - name: Commit footer changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes needed."
+            exit 0
+          fi
+          git commit -m "Add consistent footer to all S Shop pages"
+          git push
