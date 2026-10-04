@@ -163,3 +163,50 @@ function showCartNotification(productName) {
 
     }
 }
+
+/* =========================================================
+   S SHOP MICRO-INTERACTIONS
+========================================================= */
+(() => {
+    const ready = () => {
+        // Animate product cards in without a framework.
+        const cards = document.querySelectorAll(".product-card");
+        cards.forEach((card, index) => {
+            card.style.animationDelay = Math.min(index * 45, 500) + "ms";
+            card.classList.add("ss-card-ready");
+        });
+
+        // Pulse the cart counter whenever its visible value changes.
+        const counter = document.getElementById("cartCount");
+        if (counter) {
+            let previous = counter.textContent;
+
+            const observer = new MutationObserver(() => {
+                if (counter.textContent !== previous) {
+                    previous = counter.textContent;
+                    counter.classList.remove("ss-pop");
+                    void counter.offsetWidth;
+                    counter.classList.add("ss-pop");
+                }
+            });
+
+            observer.observe(counter, { childList: true, characterData: true, subtree: true });
+        }
+
+        // Small scroll-depth hint for long catalog pages.
+        const updateScroll = () => {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
+            document.documentElement.style.setProperty("--ss-scroll", progress + "%");
+        };
+
+        updateScroll();
+        window.addEventListener("scroll", updateScroll, { passive: true });
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", ready);
+    } else {
+        ready();
+    }
+})();
