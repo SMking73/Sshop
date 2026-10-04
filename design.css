@@ -1360,7 +1360,7 @@ main,.main{max-width:1550px;margin:34px auto;}
 .product-sale .product-badge{background:linear-gradient(90deg,#00a878,#42e695);}
 .product-new .product-badge{background:linear-gradient(90deg,#7b2cff,#c76cff);}
 .products::before{
-    content:"🔥 Featured & Trending";
+    content: "⚡ Featured & Trending";
     grid-column:1/-1;
     font-size:clamp(25px,3vw,38px);
     font-weight:900;
