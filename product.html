@@ -443,7 +443,12 @@
         // =========================
         // Favorites
         // =========================
-        let favorites = JSON.parse(localStorage.getItem("sShopFavorites")) || [];
+        let favorites = [];
+        try {
+            favorites = JSON.parse(localStorage.getItem("sShopFavorites")) || [];
+        } catch (error) {
+            favorites = [];
+        }
 
         function saveFavorites() {
             localStorage.setItem("sShopFavorites", JSON.stringify(favorites));
@@ -520,7 +525,12 @@
         const ratingStars = document.querySelectorAll("#ratingStars button");
         const ratingText = document.getElementById("ratingText");
 
-        let ratings = JSON.parse(localStorage.getItem("sShopRatings")) || {};
+        let ratings = {};
+        try {
+            ratings = JSON.parse(localStorage.getItem("sShopRatings")) || {};
+        } catch (error) {
+            ratings = {};
+        }
 
         function saveRatings() {
             localStorage.setItem("sShopRatings", JSON.stringify(ratings));
@@ -581,6 +591,7 @@
 
                 popup.classList.add("active");
                 popup.setAttribute("aria-hidden", "false");
+                popup.style.display = "flex";
                 document.body.classList.add("popup-open");
             });
 
@@ -598,6 +609,7 @@
         function closeProductPopup() {
             popup.classList.remove("active");
             popup.setAttribute("aria-hidden", "true");
+            popup.style.display = "none";
             document.body.classList.remove("popup-open");
             currentProduct = null;
         }
