@@ -1757,3 +1757,171 @@ html[data-theme="light"] .product-card .price{
         transition-duration:.01ms!important;
     }
 }
+
+
+/* =========================================================
+   S SHOP DEVICE-AWARE UI
+   Automatically adapts to Mobile / Tablet / Laptop / Desktop / TV.
+   Product Card design is intentionally preserved.
+========================================================= */
+
+body.device-mobile .main,
+body.device-tablet .main,
+body.device-laptop .main,
+body.device-desktop .main,
+body.device-tv .main {
+    transition: max-width 0.2s ease;
+}
+
+/* 📱 Mobile */
+body.device-mobile .head {
+    gap: 14px;
+    padding: 14px 16px;
+}
+
+body.device-mobile .head h1 {
+    font-size: 28px;
+}
+
+body.device-mobile .head nav {
+    width: 100%;
+    gap: 10px 16px;
+}
+
+body.device-mobile .head nav a {
+    font-size: 14px;
+}
+
+body.device-mobile .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+body.device-mobile .hero {
+    max-height: 300px;
+}
+
+/* 📱 Tablet */
+body.device-tablet .head {
+    gap: 24px;
+    padding: 18px 22px;
+}
+
+body.device-tablet .products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+body.device-tablet .hero {
+    max-height: 420px;
+}
+
+/* 💻 Laptop */
+body.device-laptop .main {
+    width: 94%;
+    max-width: 1450px;
+}
+
+body.device-laptop .products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* 🖥️ Desktop */
+body.device-desktop .main {
+    width: 94%;
+    max-width: 1650px;
+}
+
+body.device-desktop .products {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+/* 📺 TV */
+body.device-tv {
+    font-size: 20px;
+}
+
+body.device-tv .head {
+    padding: 28px 42px;
+    gap: 42px;
+}
+
+body.device-tv .head h1 {
+    font-size: 42px;
+}
+
+body.device-tv .head nav {
+    gap: 34px;
+}
+
+body.device-tv .head nav a,
+body.device-tv .theme-toggle,
+body.device-tv .search-form input,
+body.device-tv .search-form button {
+    font-size: 20px;
+}
+
+body.device-tv .main {
+    width: 92%;
+    max-width: 1900px;
+    margin-top: 38px;
+}
+
+body.device-tv .hero {
+    max-height: 620px;
+}
+
+body.device-tv .products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+}
+
+body.device-tv .product-card {
+    height: 430px;
+    padding: 20px;
+}
+
+body.device-tv .product-card h2 {
+    font-size: 24px;
+}
+
+body.device-tv .product-card .price {
+    font-size: 21px;
+}
+
+body.device-tv button,
+body.device-tv a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body.device-tv .popup-content {
+    width: min(1500px, 90vw);
+    font-size: 20px;
+}
+
+/* Portrait devices get a compact grid automatically. */
+body.device-mobile[data-orientation="portrait"] .products,
+body.device-tablet[data-orientation="portrait"] .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Landscape mobile/tablet can use the extra width. */
+body.device-mobile[data-orientation="landscape"] .products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body.device-tablet[data-orientation="landscape"] .products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+    body.device-mobile *,
+    body.device-tablet *,
+    body.device-laptop *,
+    body.device-desktop *,
+    body.device-tv * {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
