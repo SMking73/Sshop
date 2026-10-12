@@ -3,7 +3,7 @@
 (() => {
   "use strict";
 
-  const translations = new Map(Object.entries({
+  let englishTitle = document.title;\n\n  const translations = new Map(Object.entries({
     "Home":"خانه", "Products":"محصولات", "About Us":"درباره ما",
     "Favorites":"علاقه‌مندی‌ها", "♥ Favorites":"♥ علاقه‌مندی‌ها", "❤️ Favorites":"❤️ علاقه‌مندی‌ها", "💛 Favorites":"💛 علاقه‌مندی‌ها",
     "Cart":"سبد خرید", "🛒 Cart":"🛒 سبد خرید", "Search items":"جست‌وجوی محصولات",
@@ -167,7 +167,7 @@
       button.setAttribute("aria-label", fa ? "Switch to English" : "تغییر زبان به فارسی");
       button.title = fa ? "Switch to English" : "تغییر زبان به فارسی";
     });
-    document.title = fa ? (translations.get(document.title) || document.title) : document.title;\n    document.querySelectorAll("[aria-label], [title]").forEach(el => {\n      for (const attr of ["aria-label", "title"]) {\n        const value = el.getAttribute(attr);\n        if (!value) continue;\n        if (el.dataset["en" + attr.replace(/[^a-z]/gi, "")] === undefined) el.dataset["en" + attr.replace(/[^a-z]/gi, "")] = value;\n        const key = el.dataset["en" + attr.replace(/[^a-z]/gi, "")];\n        if (fa && translations.has(key)) el.setAttribute(attr, translations.get(key));\n        else if (!fa) el.setAttribute(attr, key);\n      }\n    });\n    localStorage.setItem("sshop-language", fa ? "fa" : "en");
+    document.title = fa ? (translations.get(englishTitle) || englishTitle) : englishTitle;\n    document.querySelectorAll("[aria-label], [title]").forEach(el => {\n      for (const attr of ["aria-label", "title"]) {\n        const value = el.getAttribute(attr);\n        if (!value) continue;\n        if (el.dataset["en" + attr.replace(/[^a-z]/gi, "")] === undefined) el.dataset["en" + attr.replace(/[^a-z]/gi, "")] = value;\n        const key = el.dataset["en" + attr.replace(/[^a-z]/gi, "")];\n        if (fa && translations.has(key)) el.setAttribute(attr, translations.get(key));\n        else if (!fa) el.setAttribute(attr, key);\n      }\n    });\n    localStorage.setItem("sshop-language", fa ? "fa" : "en");
   }
 
   function addStyles() {
