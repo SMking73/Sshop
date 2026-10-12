@@ -57,7 +57,9 @@
   }));
 
   const protectedSelectors = [
-    ".product-card", ".favorite-card", ".cart-product", ".cart-item .product-info",
+    ".product-card h2", ".product-card .price", ".product-card .product-name",
+    ".favorite-card h2", ".favorite-card .favorite-price", ".favorite-card .favorite-category",
+    ".cart-product .product-info", ".cart-item .product-info",
     ".product-details .product-description", "[data-product-info]"
   ].join(",");
 
