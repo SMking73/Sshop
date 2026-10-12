@@ -2,7 +2,7 @@
 (() => {
   "use strict";
   const translations = new Map(Object.entries({
-    "Home":"خانه","Products":"محصولات","About Us":"درباره ما","Favorites":"علاقه‌مندی‌ها","♥ Favorites":"♥ علاقه‌مندی‌ها","❤️ Favorites":"❤️ علاقه‌مندی‌ها","💛 Favorites":"💛 علاقه‌مندی‌ها","Cart":"سبد خرید","🛒 Cart":"🛒 سبد خرید","Search items":"جست‌وجوی محصولات",
+    "Website Owner & Developer":"مالک و توسعه‌دهنده سایت","Website Owner":"مالک سایت","Home":"خانه","Products":"محصولات","About Us":"درباره ما","Favorites":"علاقه‌مندی‌ها","♥ Favorites":"♥ علاقه‌مندی‌ها","❤️ Favorites":"❤️ علاقه‌مندی‌ها","💛 Favorites":"💛 علاقه‌مندی‌ها","Cart":"سبد خرید","🛒 Cart":"🛒 سبد خرید","Search items":"جست‌وجوی محصولات",
     "☀️ Light":"☀️ روشن","🌙 Dark":"🌙 تیره","Category ▾":"دسته‌بندی‌ها ▾","🎮 Gaming PC":"🎮 کامپیوتر گیمینگ","🖱️ Mouse":"🖱️ ماوس","⌨️ Keyboard":"⌨️ کیبورد","🎧 Headset":"🎧 هدست","🎮 Console":"🎮 کنسول",
     "Gaming PC":"کامپیوتر گیمینگ","Gaming PCs":"کامپیوترهای گیمینگ","Console":"کنسول","Consoles":"کنسول‌ها","Keyboard":"کیبورد","Keyboards":"کیبوردها","Mouse":"ماوس","Mice":"ماوس‌ها","Headset":"هدست","Headsets":"هدست‌ها","Sound":"صدا","Laptop":"لپ‌تاپ","Laptops":"لپ‌تاپ‌ها","Chair":"صندلی","Computer":"کامپیوتر","Gaming Accessories":"لوازم جانبی گیمینگ",
     "Category":"دسته‌بندی","Categories":"دسته‌بندی‌ها","Featured":"پیشنهاد ویژه","Featured Products":"محصولات منتخب","Trending":"پرطرفدار","Trending Products":"محصولات پرطرفدار","NEW":"جدید","HOT":"محبوب","SALE":"تخفیف",
