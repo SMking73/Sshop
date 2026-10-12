@@ -83,52 +83,136 @@
 }
 
 
-/* Website owner credit */
+/* Website owner signature — SShop brand style */
 .sshop-owner-credit {
-    width: min(520px, calc(100% - 40px));
-    margin: 0 auto 24px;
-    padding: 18px 24px;
+    position: relative;
+    isolation: isolate;
+    width: min(620px, calc(100% - 40px));
+    margin: 4px auto 30px;
+    padding: 22px 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 18px;
     text-align: left;
-    border: 1px solid rgba(139, 61, 255, .42);
-    border-radius: 18px;
-    background: linear-gradient(135deg, rgba(139, 61, 255, .13), rgba(255, 106, 0, .09));
-    box-shadow: 0 8px 28px rgba(0, 0, 0, .18), inset 0 1px rgba(255,255,255,.04);
+    overflow: hidden;
+    border: 1px solid rgba(139, 61, 255, .34);
+    border-radius: 20px;
+    background:
+        radial-gradient(ellipse at 0% 0%, rgba(139, 61, 255, .16), transparent 58%),
+        radial-gradient(ellipse at 100% 100%, rgba(255, 106, 0, .12), transparent 55%),
+        linear-gradient(135deg, rgba(23, 20, 38, .94), rgba(13, 13, 23, .96));
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .055);
+    transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.sshop-owner-credit::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    border-radius: 0 0 99px 99px;
+    background: linear-gradient(90deg, transparent, #8b3dff 28%, #ff6a00 72%, transparent);
+    opacity: .9;
+}
+.sshop-owner-credit::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 150px;
+    height: 150px;
+    right: -95px;
+    bottom: -105px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 106, 0, .15);
+    box-shadow: 0 0 0 14px rgba(255, 106, 0, .025), 0 0 0 28px rgba(255, 106, 0, .02);
+}
+.sshop-owner-credit:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 106, 0, .5);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, .28), 0 0 24px rgba(139, 61, 255, .08);
 }
 .sshop-owner-avatar {
-    flex: 0 0 48px;
-    width: 48px;
-    height: 48px;
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
     display: grid;
     place-items: center;
-    border-radius: 15px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 17px;
     color: #fff;
-    font-size: 24px;
-    background: linear-gradient(135deg, #8b3dff, #ff6a00);
-    box-shadow: 0 5px 16px rgba(139, 61, 255, .24);
+    font: 900 19px/1 Arial, sans-serif;
+    letter-spacing: -.06em;
+    background: linear-gradient(145deg, #8b3dff 4%, #6425c8 48%, #ff6a00 100%);
+    box-shadow: 0 7px 20px rgba(139, 61, 255, .22), inset 0 1px 0 rgba(255, 255, 255, .25);
 }
-.sshop-owner-copy { display: flex; flex-direction: column; gap: 3px; }
+.sshop-owner-copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
 .sshop-owner-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     margin: 0;
-    color: rgba(255,255,255,.58);
-    font-size: 12px;
-    letter-spacing: .08em;
+    color: #ffb36f;
+    font: 700 10px/1.5 Arial, sans-serif;
+    letter-spacing: .15em;
     text-transform: uppercase;
+}
+.sshop-owner-label::before {
+    content: "";
+    width: 17px;
+    height: 1px;
+    background: linear-gradient(90deg, #8b3dff, #ff6a00);
 }
 .sshop-owner-name {
     margin: 0;
     color: #fff;
-    font-size: 18px;
-    font-weight: 800;
-    line-height: 1.8;
+    font: 800 22px/1.7 Tahoma, Arial, sans-serif;
+    letter-spacing: 0;
+    text-shadow: 0 2px 14px rgba(139, 61, 255, .22);
 }
-body.sshop-persian .sshop-owner-credit { direction: rtl; text-align: right; }
-body.sshop-persian .sshop-owner-label { letter-spacing: 0; }
+body.sshop-persian .sshop-owner-credit {
+    direction: rtl;
+    text-align: right;
+}
+body.sshop-persian .sshop-owner-copy {
+    align-items: flex-start;
+}
+body.sshop-persian .sshop-owner-label {
+    letter-spacing: 0;
+    font-family: Tahoma, Arial, sans-serif;
+}
+body.sshop-persian .sshop-owner-label::before {
+    background: linear-gradient(270deg, #8b3dff, #ff6a00);
+}
 @media (max-width: 520px) {
-    .sshop-owner-credit { padding: 15px 17px; gap: 12px; }
-    .sshop-owner-avatar { width: 42px; height: 42px; flex-basis: 42px; }
-    .sshop-owner-name { font-size: 16px; }
+    .sshop-owner-credit {
+        width: calc(100% - 32px);
+        margin-bottom: 24px;
+        padding: 18px 17px;
+        gap: 14px;
+        border-radius: 17px;
+    }
+    .sshop-owner-avatar {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+        border-radius: 14px;
+        font-size: 17px;
+    }
+    .sshop-owner-label {
+        font-size: 9px;
+        letter-spacing: .09em;
+    }
+    .sshop-owner-name {
+        font-size: 18px;
+    }
 }
